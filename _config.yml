@@ -1,7 +1,7 @@
 # Site setings
-name: 'CloudSafari'
-description: 'Life is a journey. And the cloud is inheriting our life''s complexity. From time to time, I'll have a safari trip into the cloud and this is my journal of what I learned. Not sure if it''s useful to you but I hope it will be' 
-meta_description: 'Cloud,Microsoft,Azure,Synapse Analytics,Databricks,Data Factory,Data Lake, Azure Functions'
+name: "CloudSafari"
+description: "Life is a journey. And the cloud is inheriting our life's complexity. From time to time, I'll have a safari trip into the cloud and this is my journal of what I learned. Not sure if it's useful to you but I hope it will be"
+meta_description: "Cloud,Microsoft,Azure,Synapse Analytics,Databricks,Data Factory,Data Lake, Azure Functions"
 logo: 'assets/images/logo.png'
 favicon: 'assets/images/favicon.ico'
 baseurl: 
