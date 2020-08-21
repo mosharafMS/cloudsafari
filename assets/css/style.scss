@@ -103,6 +103,14 @@
   margin: 0;
 }
 
+.logo-cropper {
+  width: 100px;
+  height: 100px;
+  position: relative;
+  overflow: hidden;
+  border-radius: 50%;
+}
+
 .site-logo img {
   max-height: 48px;
 }
