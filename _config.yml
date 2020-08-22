@@ -2,7 +2,7 @@
 name: "CloudSafari"
 description: "Life is a journey. And the cloud is inheriting our life's complexity. From time to time, I'll have a safari trip into the cloud and this is my journal of what I learned. Not sure if it's useful to you but I hope it will be"
 meta_description: "Cloud,Microsoft,Azure,Synapse Analytics,Databricks,Data Factory,Data Lake, Azure Functions"
-logo: 'assets/images/logo.png'
+logo: 
 favicon: 'assets/images/favicon.ico'
 baseurl: 
 production_url: https://cloudsafari.ca/
@@ -27,23 +27,23 @@ contact_page_description: "Horace theme comes with a contact form built-in. You 
 thankyou_page_description: "Your message has been successfully sent. We will contact you very soon!"
 
 # Social links
-twitter: 'username'
-facebook: 'username'
-github: 'username'
+twitter: '@mohamsharaf'
+facebook: 
+github: 'mosharafMS'
 codepen: 'username'
 dribbble: 'username'
-medium: '@username'
-instagram: 'username'
-pinterest: 'username'
-linkedin: 'username'
-producthunt: '@username'
+medium: '@mohamed.sharaf'
+instagram: 
+pinterest: 
+linkedin: 'mosharafms'
+producthunt: 
 
 # Navigation
 navigation:
+  - text: Home
+    url: /
   - text: About
     url: /about/
-  - text: Style Guide
-    url: /style-guide/
   - text: Contact Me
     url: /contact/
 
