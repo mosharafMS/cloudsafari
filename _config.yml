@@ -30,8 +30,8 @@ thankyou_page_description: "Your message has been successfully sent. We will con
 twitter: '@mohamsharaf'
 facebook: 
 github: 'mosharafMS'
-codepen: 'username'
-dribbble: 'username'
+codepen: 
+dribbble: 
 medium: '@mohamed.sharaf'
 instagram: 
 pinterest: 
@@ -40,8 +40,6 @@ producthunt:
 
 # Navigation
 navigation:
-  - text: Home
-    url: /
   - text: About
     url: /about/
   - text: Contact Me
