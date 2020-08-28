@@ -22,9 +22,9 @@ author:
   bio: 'To be added'
 
 # Contact form setings
-email: youremail@email.com
-contact_page_description: "Horace theme comes with a contact form built-in. You can use this form with Formspree service and get up to 50 submissions for free. Also, you can easily switch to another service if you want."
-thankyou_page_description: "Your message has been successfully sent. We will contact you very soon!"
+email: 
+contact_page_description: 
+thankyou_page_description: 
 
 # Social links
 twitter: '@mohamsharaf'
@@ -42,8 +42,7 @@ producthunt:
 navigation:
   - text: About
     url: /about/
-  - text: Contact Me
-    url: /contact/
+
 
 # Required Plugins
 plugins_dir:
