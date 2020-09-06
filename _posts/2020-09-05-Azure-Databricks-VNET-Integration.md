@@ -57,7 +57,10 @@ In my testing, I used [Azure Firewall](https://docs.microsoft.com/en-us/azure/fi
 
 ## Documented Rules
 ### Control plane NAT and Webapp IP addresses
-Per each Azure region that has Databricks enabled in, there are two IP ranges, one for the control plane and one for the webapp 
+
+
+### DBFS root Blob storage IP address
+
 
 ## Special un-documented domains
 During my testing with Azure Firewall & Databricks, I found that the docs didn’t cover all the FQDNs that are requested by my cluster. From my testing I found out these extra ones
@@ -67,5 +70,5 @@ During my testing with Azure Firewall & Databricks, I found that the docs didn�
 -   cloudflare → *.cloudflare.com
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbNTYyMjE0NTE0LC0xNjk3NTcwODc0XX0=
+eyJoaXN0b3J5IjpbLTI3MzU3MTEzOSwtMTY5NzU3MDg3NF19
 -->
