@@ -56,11 +56,8 @@ Because of how stateful firewalls work , the routing table should avoid routing 
 In my testing, I used [Azure Firewall](https://docs.microsoft.com/en-us/azure/firewall/overview) and I'll list all the Network Rules and Application Rules I added to have a successful cluster creation and running sample notebook. 
 
 ## Documented Rules
-### Control plane NAT and Webapp IP addresses
-
-
 ### DBFS root Blob storage IP address
-
+Each workspace has a storage account created and managed by Databricks to act as the local file system of the clusters of this workspace. Also is used to save the 
 
 ## Special un-documented domains
 During my testing with Azure Firewall & Databricks, I found that the docs didn’t cover all the FQDNs that are requested by my cluster. From my testing I found out these extra ones
@@ -70,5 +67,5 @@ During my testing with Azure Firewall & Databricks, I found that the docs didn�
 -   cloudflare → *.cloudflare.com
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTYzNDYxODkzOCwtMTY5NzU3MDg3NF19
+eyJoaXN0b3J5IjpbMjAyNjQ4OTAwNiwtMTY5NzU3MDg3NF19
 -->
