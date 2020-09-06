@@ -49,7 +49,7 @@ On of the main reasons to have Azure Databricks workspaces integrated with VNET 
 
 ![Asymmetric traffic](/assets/images/posts/2020/assymetric-network.png)
 
-Because of how stateful firewalls work , the routing table should avoid routing *ALL* the traffic but to exclude the traffic going to the control plane and the web app of Databricks
+Because of how stateful firewalls work , the routing table should avoid routing *ALL* the traffic but to exclude the traffic going to the control plane and the web app of Databricks. Per each Azure region that has Databricks enabled in, there are two IP ranges, one for the control plane and one for the webapp. These are unique to the region and should be excluded from the routing. The screenshot below shows the routing for a databricks in Canada Central region. 
  
 ![Sample Routing Table](/assets/images/posts/2020/routing-table.png)
 
@@ -70,5 +70,5 @@ During my testing with Azure Firewall & Databricks, I found that the docs didnâ€
 -   cloudflare â†’ *.cloudflare.com
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTI3MzU3MTEzOSwtMTY5NzU3MDg3NF19
+eyJoaXN0b3J5IjpbMTYzNDYxODkzOCwtMTY5NzU3MDg3NF19
 -->
