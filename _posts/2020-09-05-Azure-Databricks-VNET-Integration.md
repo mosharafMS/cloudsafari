@@ -58,6 +58,7 @@ In my testing, I used [Azure Firewall](https://docs.microsoft.com/en-us/azure/fi
 ## Documented Rules
 ### DBFS root Blob storage IP address
 Each workspace has a storage account created and managed by Databricks to act as the local file system of the clusters of this workspace. Also is used to save the notebooks. There's a storage account per workspace in the managed resource group of the workspace. The naming convention of it is dbstorage < random alphanumeric string> 
+Until now, Databricks doesn't use private endpoint for these storage 
 
 ## Special un-documented domains
 During my testing with Azure Firewall & Databricks, I found that the docs didn’t cover all the FQDNs that are requested by my cluster. From my testing I found out these extra ones
@@ -67,5 +68,5 @@ During my testing with Azure Firewall & Databricks, I found that the docs didn�
 -   cloudflare → *.cloudflare.com
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTM0NDY4NTA3MCwtMTY5NzU3MDg3NF19
+eyJoaXN0b3J5IjpbLTg0NTI3MTc0NiwtMTY5NzU3MDg3NF19
 -->
