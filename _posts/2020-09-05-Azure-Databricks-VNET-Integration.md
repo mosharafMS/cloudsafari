@@ -67,6 +67,9 @@ Each workspace has a storage account created and managed by Databricks to act as
 Until now, Databricks doesn't use private endpoint for these storage accounts (something for the near future may be) so the traffic destined to this storage account has to pass through the firewall and you need to use Application Rule (by using the FQDN) to allow it. 
 I highly recommended not using something like `*.blob.core.windows.net` because that allows the Databricks cluster to reach any storage account on Azure anywhere in the globe which will open the door for exfilteration attacks. 
 
+###  Metastore, artifact Blob storage, log Blob storage, and Event Hub endpoint IP addresses
+
+
 ## Special un-documented domains
 During my testing with Azure Firewall & Databricks, I found that the docs didn’t cover all the FQDNs that are requested by my cluster. From my testing I found out these extra ones
 -   Ubuntu updates → *.ubuntu.com
@@ -75,6 +78,6 @@ During my testing with Azure Firewall & Databricks, I found that the docs didn�
 -   cloudflare → *.cloudflare.com
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbNDE5NDM5MDcsLTg0NTI3MTc0NiwtMTY5Nz
-U3MDg3NF19
+eyJoaXN0b3J5IjpbMjAwNTM1Mzk5Miw0MTk0MzkwNywtODQ1Mj
+cxNzQ2LC0xNjk3NTcwODc0XX0=
 -->
