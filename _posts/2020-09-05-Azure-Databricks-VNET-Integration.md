@@ -45,7 +45,13 @@ On of the main reasons to have Azure Databricks workspaces integrated with VNET 
     Azure Databricks to be filtered by the firewall first.
  2. In the firewall you add rules to allow the traffic needed for your workspace
 
-*The traffic coming to the public IPs of the workspace clusters, doesn’t pass on the firwall and if your routing route all 0.0.0.0/0 to the firewall that means the firewall will only see the return of the traffic and for any stateful firewall like Azure Firewall, it will drop the traffic. You have to add exception of the routing for the control plane. The screenshot below shows this problem. For a complete list of the IPs per region, refer to the* [docs](https://docs.microsoft.com/en-us/azure/databricks/administration-guide/cloud-configurations/azure/udr)
+> The traffic coming to the public IPs of the workspace clusters,
+> doesn’t pass on the firwall and if your routing route all 0.0.0.0/0 to
+> the firewall that means the firewall will only see the return of the
+> traffic and for any stateful firewall like Azure Firewall, it will
+> drop the traffic. You have to add exception of the routing for the
+> control plane. The screenshot below shows this problem. For a complete
+> list of the IPs per region, refer to the [docs](https://docs.microsoft.com/en-us/azure/databricks/administration-guide/cloud-configurations/azure/udr)
 
 ![Asymmetric traffic](/assets/images/posts/2020/assymetric-network.png)
 
@@ -69,6 +75,6 @@ During my testing with Azure Firewall & Databricks, I found that the docs didn�
 -   cloudflare → *.cloudflare.com
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE0NjQzMDA1ODUsLTg0NTI3MTc0NiwtMT
-Y5NzU3MDg3NF19
+eyJoaXN0b3J5IjpbNDE5NDM5MDcsLTg0NTI3MTc0NiwtMTY5Nz
+U3MDg3NF19
 -->
