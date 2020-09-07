@@ -76,7 +76,7 @@ I highly recommended not using something like `*.blob.core.windows.net` because 
     Name:    cr2.canadacentral1-a.control.database.windows.net
     Address:  52.228.35.221
     Aliases:  consolidated-canadacentral-prod-metastore.mysql.database.azure.com
-In Azure Firwall, we can use the FQDN so there's no need to get the IP but if 
+In Azure Firewall, we can use the FQDN in the network rules so there's no need to get the IP but if your firewall doesn't support that then get the IP and periodically update it.   
 
 ## Special un-documented domains
 During my testing with Azure Firewall & Databricks, I found that the docs didnâ€™t cover all the FQDNs that are requested by my cluster. From my testing I found out these extra ones
@@ -87,8 +87,8 @@ During my testing with Azure Firewall & Databricks, I found that the docs didnâ€
 
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTkwNjgwMzY5OCwxNzA1NjUyNDc2LDU5Mz
-Y5MzI4LC0xNDE5NDI4OTYzLDg0OTkwNzUxMiwxODU2NzE1Nzcs
-MjAwNTM1Mzk5Miw0MTk0MzkwNywtODQ1MjcxNzQ2LC0xNjk3NT
-cwODc0XX0=
+eyJoaXN0b3J5IjpbMTQ5MjY3MTUxNCwxOTA2ODAzNjk4LDE3MD
+U2NTI0NzYsNTkzNjkzMjgsLTE0MTk0Mjg5NjMsODQ5OTA3NTEy
+LDE4NTY3MTU3NywyMDA1MzUzOTkyLDQxOTQzOTA3LC04NDUyNz
+E3NDYsLTE2OTc1NzA4NzRdfQ==
 -->
