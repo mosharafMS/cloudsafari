@@ -71,6 +71,12 @@ I highly recommended not using something like `*.blob.core.windows.net` because 
 **Metastore** is a mysql database where the metadata about the workspace is saved
 . Which means if you are using IP & port combination then you need to get the IP of the URL from the docs and use port 3306. For example for Canada Central 
 
+    nslookup consolidated-canadacentral-prod-metastore.mysql.database.azure.com
+
+    Name:    cr2.canadacentral1-a.control.database.windows.net
+    Address:  52.228.35.221
+    Aliases:  consolidated-canadacentral-prod-metastore.mysql.database.azure.com
+
 ## Special un-documented domains
 During my testing with Azure Firewall & Databricks, I found that the docs didn’t cover all the FQDNs that are requested by my cluster. From my testing I found out these extra ones
 -   Ubuntu updates → *.ubuntu.com
@@ -78,8 +84,9 @@ During my testing with Azure Firewall & Databricks, I found that the docs didn�
 -   terracotta → *.terracotta.org
 -   cloudflare → *.cloudflare.com
 
+
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE0MTk0Mjg5NjMsODQ5OTA3NTEyLDE4NT
-Y3MTU3NywyMDA1MzUzOTkyLDQxOTQzOTA3LC04NDUyNzE3NDYs
-LTE2OTc1NzA4NzRdfQ==
+eyJoaXN0b3J5IjpbNTkzNjkzMjgsLTE0MTk0Mjg5NjMsODQ5OT
+A3NTEyLDE4NTY3MTU3NywyMDA1MzUzOTkyLDQxOTQzOTA3LC04
+NDUyNzE3NDYsLTE2OTc1NzA4NzRdfQ==
 -->
