@@ -77,7 +77,8 @@ I highly recommended not using something like `*.blob.core.windows.net` because 
     Address:  52.228.35.221
     Aliases:  consolidated-canadacentral-prod-metastore.mysql.database.azure.com
 In Azure Firewall, we can use the FQDN in the network rules so there's no need to get the IP but if your firewall doesn't support that then get the IP and periodically update it.   
-**Artifact Blob storage** both primary & secondary storage accounts 
+**Artifact Blob storage** both primary & secondary storage accounts (which can be the same account in some regions) are the storage account where the scripts and the binary files of Databricks are saved at. 
+
 ## Special un-documented domains
 During my testing with Azure Firewall & Databricks, I found that the docs didn’t cover all the FQDNs that are requested by my cluster. From my testing I found out these extra ones
 -   Ubuntu updates → *.ubuntu.com
@@ -87,8 +88,8 @@ During my testing with Azure Firewall & Databricks, I found that the docs didn�
 
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTQwMjYwNjEzMCwxOTA2ODAzNjk4LDE3MD
-U2NTI0NzYsNTkzNjkzMjgsLTE0MTk0Mjg5NjMsODQ5OTA3NTEy
-LDE4NTY3MTU3NywyMDA1MzUzOTkyLDQxOTQzOTA3LC04NDUyNz
-E3NDYsLTE2OTc1NzA4NzRdfQ==
+eyJoaXN0b3J5IjpbMTA4MjcyMjY4MSwtNDAyNjA2MTMwLDE5MD
+Y4MDM2OTgsMTcwNTY1MjQ3Niw1OTM2OTMyOCwtMTQxOTQyODk2
+Myw4NDk5MDc1MTIsMTg1NjcxNTc3LDIwMDUzNTM5OTIsNDE5ND
+M5MDcsLTg0NTI3MTc0NiwtMTY5NzU3MDg3NF19
 -->
