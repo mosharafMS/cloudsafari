@@ -69,7 +69,7 @@ I highly recommended not using something like `*.blob.core.windows.net` because 
 
 ###  Metastore, artifact Blob storage, log Blob storage, and Event Hub endpoint IP addresses
 **Metastore** is a mysql database where the metadata about the workspace is saved
-. Which means if you are using IP & port combination then you need to get the IP of the URL from the docs and use port 3306 which is the default port 
+. Which means if you are using IP & port combination then you need to get the IP of the URL from the docs and use port 3306. For example for Canada Central 
 ## Special un-documented domains
 During my testing with Azure Firewall & Databricks, I found that the docs didn’t cover all the FQDNs that are requested by my cluster. From my testing I found out these extra ones
 -   Ubuntu updates → *.ubuntu.com
@@ -78,7 +78,7 @@ During my testing with Azure Firewall & Databricks, I found that the docs didn�
 -   cloudflare → *.cloudflare.com
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbODQ5OTA3NTEyLDE4NTY3MTU3NywyMDA1Mz
-UzOTkyLDQxOTQzOTA3LC04NDUyNzE3NDYsLTE2OTc1NzA4NzRd
-fQ==
+eyJoaXN0b3J5IjpbLTkyNjI3MjY1Nyw4NDk5MDc1MTIsMTg1Nj
+cxNTc3LDIwMDUzNTM5OTIsNDE5NDM5MDcsLTg0NTI3MTc0Niwt
+MTY5NzU3MDg3NF19
 -->
