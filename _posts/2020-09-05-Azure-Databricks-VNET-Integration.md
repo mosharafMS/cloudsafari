@@ -68,7 +68,7 @@ Until now, Databricks doesn't use private endpoint for these storage accounts (s
 I highly recommended not using something like `*.blob.core.windows.net` because that allows the Databricks cluster to reach any storage account on Azure anywhere in the globe which will open the door for exfilteration attacks. 
 
 ###  Metastore, artifact Blob storage, log Blob storage, and Event Hub endpoint IP addresses
-
+**Metastore** is a mysql database where the metadata about the workspace is saved
 
 ## Special un-documented domains
 During my testing with Azure Firewall & Databricks, I found that the docs didn’t cover all the FQDNs that are requested by my cluster. From my testing I found out these extra ones
@@ -78,6 +78,6 @@ During my testing with Azure Firewall & Databricks, I found that the docs didn�
 -   cloudflare → *.cloudflare.com
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMjAwNTM1Mzk5Miw0MTk0MzkwNywtODQ1Mj
-cxNzQ2LC0xNjk3NTcwODc0XX0=
+eyJoaXN0b3J5IjpbMTg1NjcxNTc3LDIwMDUzNTM5OTIsNDE5ND
+M5MDcsLTg0NTI3MTc0NiwtMTY5NzU3MDg3NF19
 -->
