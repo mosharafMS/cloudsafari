@@ -91,9 +91,9 @@ During my testing with Azure Firewall & Databricks, I found that the docs didnâ€
 -   cloudflare â†’ *.cloudflare.com
 zrdfepirv2yto21prdstr02a.blob.core.windows.net	
 zrdfepirv2yt1prdstr06a.blob.core.windows.net	
-
+sts.amazonaws.com
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTU5MDUwNDc1MiwtODYzNzM1Njc1LC00MD
+eyJoaXN0b3J5IjpbLTg5ODczNDI1MiwtODYzNzM1Njc1LC00MD
 I2MDYxMzAsMTkwNjgwMzY5OCwxNzA1NjUyNDc2LDU5MzY5MzI4
 LC0xNDE5NDI4OTYzLDg0OTkwNzUxMiwxODU2NzE1NzcsMjAwNT
 M1Mzk5Miw0MTk0MzkwNywtODQ1MjcxNzQ2LC0xNjk3NTcwODc0
