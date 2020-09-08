@@ -1,6 +1,15 @@
----
 
 ---
+
+layout: post
+title:  "What is Jekyll?"
+tags: [ Jekyll, Development ]
+featured_image_thumbnail: assets/images/posts/2018/11_thumbnail.jpg
+
+featured_image: assets/images/posts/2018/11.jpg
+
+---
+
 # Azure Databricks Networking Deep dive
 
 This is an updated version of my article at [Medium.com](https://medium.com/cloudsafari-ca/azure-databricks-deployments-issues-3195ea8c7f56) originally written on December 2019 as some changes happened since then 
@@ -114,7 +123,7 @@ zrdfepirv2yto21prdstr02a.blob.core.windows.net
 zrdfepirv2yt1prdstr06a.blob.core.windows.net	
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTkwNDg2NzY3OCwxMjAzMzAzNDEyLC0xND
+eyJoaXN0b3J5IjpbMTcwMzIxNTAxMSwxMjAzMzAzNDEyLC0xND
 Y2NDgxNjc3LDIwMDE0NTg0MTQsMTAyMTUxNTk2Niw1MTE1NTUw
 Myw0OTYxMDk3OTEsLTEwMzkxODUxODMsNjUyNzQwMjc0LC0xMz
 Y5MTc5Mzk3LDE2MzU0MDgxODUsLTg5ODczNDI1MiwtODYzNzM1
