@@ -81,7 +81,7 @@ In Azure Firewall, we can use the FQDN in the network rules so there's no need t
 
 **Log Blob storage** is another storage used for cluster logs 
 
-**Event Hub endpoint** eventhub endpoint used for shipping logs as well. 
+**Event Hub endpoint** eventhub endpoint used for shipping logs as well. This is event
 
 ## Special un-documented domains
 During my testing with Azure Firewall & Databricks, I found that the docs didn’t cover all the FQDNs that are requested by my cluster. From my testing I found out these extra ones
@@ -94,9 +94,9 @@ zrdfepirv2yto21prdstr02a.blob.core.windows.net
 zrdfepirv2yt1prdstr06a.blob.core.windows.net	
 sts.amazonaws.com
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTYzNTQwODE4NSwtODk4NzM0MjUyLC04Nj
-M3MzU2NzUsLTQwMjYwNjEzMCwxOTA2ODAzNjk4LDE3MDU2NTI0
-NzYsNTkzNjkzMjgsLTE0MTk0Mjg5NjMsODQ5OTA3NTEyLDE4NT
-Y3MTU3NywyMDA1MzUzOTkyLDQxOTQzOTA3LC04NDUyNzE3NDYs
-LTE2OTc1NzA4NzRdfQ==
+eyJoaXN0b3J5IjpbNTc5NjgxOTE1LDE2MzU0MDgxODUsLTg5OD
+czNDI1MiwtODYzNzM1Njc1LC00MDI2MDYxMzAsMTkwNjgwMzY5
+OCwxNzA1NjUyNDc2LDU5MzY5MzI4LC0xNDE5NDI4OTYzLDg0OT
+kwNzUxMiwxODU2NzE1NzcsMjAwNTM1Mzk5Miw0MTk0MzkwNywt
+ODQ1MjcxNzQ2LC0xNjk3NTcwODc0XX0=
 -->
