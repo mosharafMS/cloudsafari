@@ -91,13 +91,13 @@ During my testing with Azure Firewall & Databricks, I found that the docs didn�
 -   terracotta → *.terracotta.org
 -   cloudflare → *.cloudflare.com
 -  ICMP Type 8 (Ping) to 172.217.13.164 which is an IP belongs to Google. I didn't see any docs for it but since it's just ping, I didn't see an issue with that traffic. It can be a heartbeat to check if the server has connectivity with the internet. It can be due to exceptions raised by blocked URLs so the servers check connectivity. 
-- 
+- When accessing the sample notebook 
 - 
 zrdfepirv2yto21prdstr02a.blob.core.windows.net	
 zrdfepirv2yt1prdstr06a.blob.core.windows.net	
 sts.amazonaws.com
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE4OTgwNDUxNDQsNjUyNzQwMjc0LC0xMz
+eyJoaXN0b3J5IjpbLTE0MzI0ODAwODIsNjUyNzQwMjc0LC0xMz
 Y5MTc5Mzk3LDE2MzU0MDgxODUsLTg5ODczNDI1MiwtODYzNzM1
 Njc1LC00MDI2MDYxMzAsMTkwNjgwMzY5OCwxNzA1NjUyNDc2LD
 U5MzY5MzI4LC0xNDE5NDI4OTYzLDg0OTkwNzUxMiwxODU2NzE1
