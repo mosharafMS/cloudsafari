@@ -103,17 +103,18 @@ It will throw error and in the firewall logs, you will find deny access to *sts.
 
 - **nvidia.github.io** used to pull nvidia drivers. In my testing, I didn't see any clusters that has GPUs but still the traffic to nvidia github pages was recorded so it seems it's needed for all clusters not just GPU-equipped clusters. 
 - **deb.nodesource.com** this is a shortcut to [https://github.com/nodesource/distributions](https://github.com/nodesource/distributions) which has node distribution packages 
-- **files.pythonhosted.org** contains   
+- **files.pythonhosted.org**  This site hosts packages and documentation uploaded by authors of packages on the [Python Package Index](http://pypi.python.org/).  
+- 
 
 zrdfepirv2yto21prdstr02a.blob.core.windows.net	
 zrdfepirv2yt1prdstr06a.blob.core.windows.net	
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTEwNjAyMDI5NjEsMTAyMTUxNTk2Niw1MT
-E1NTUwMyw0OTYxMDk3OTEsLTEwMzkxODUxODMsNjUyNzQwMjc0
-LC0xMzY5MTc5Mzk3LDE2MzU0MDgxODUsLTg5ODczNDI1MiwtOD
-YzNzM1Njc1LC00MDI2MDYxMzAsMTkwNjgwMzY5OCwxNzA1NjUy
-NDc2LDU5MzY5MzI4LC0xNDE5NDI4OTYzLDg0OTkwNzUxMiwxOD
-U2NzE1NzcsMjAwNTM1Mzk5Miw0MTk0MzkwNywtODQ1MjcxNzQ2
-XX0=
+eyJoaXN0b3J5IjpbMjAwMTQ1ODQxNCwxMDIxNTE1OTY2LDUxMT
+U1NTAzLDQ5NjEwOTc5MSwtMTAzOTE4NTE4Myw2NTI3NDAyNzQs
+LTEzNjkxNzkzOTcsMTYzNTQwODE4NSwtODk4NzM0MjUyLC04Nj
+M3MzU2NzUsLTQwMjYwNjEzMCwxOTA2ODAzNjk4LDE3MDU2NTI0
+NzYsNTkzNjkzMjgsLTE0MTk0Mjg5NjMsODQ5OTA3NTEyLDE4NT
+Y3MTU3NywyMDA1MzUzOTkyLDQxOTQzOTA3LC04NDUyNzE3NDZd
+fQ==
 -->
