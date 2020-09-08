@@ -89,13 +89,14 @@ During my testing with Azure Firewall & Databricks, I found that the docs didn�
 -   snap packages → *.snapcraft.io
 -   terracotta → *.terracotta.org
 -   cloudflare → *.cloudflare.com
+- 
 zrdfepirv2yto21prdstr02a.blob.core.windows.net	
 zrdfepirv2yt1prdstr06a.blob.core.windows.net	
 sts.amazonaws.com
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTg5ODczNDI1MiwtODYzNzM1Njc1LC00MD
-I2MDYxMzAsMTkwNjgwMzY5OCwxNzA1NjUyNDc2LDU5MzY5MzI4
-LC0xNDE5NDI4OTYzLDg0OTkwNzUxMiwxODU2NzE1NzcsMjAwNT
-M1Mzk5Miw0MTk0MzkwNywtODQ1MjcxNzQ2LC0xNjk3NTcwODc0
-XX0=
+eyJoaXN0b3J5IjpbMTYzNTQwODE4NSwtODk4NzM0MjUyLC04Nj
+M3MzU2NzUsLTQwMjYwNjEzMCwxOTA2ODAzNjk4LDE3MDU2NTI0
+NzYsNTkzNjkzMjgsLTE0MTk0Mjg5NjMsODQ5OTA3NTEyLDE4NT
+Y3MTU3NywyMDA1MzUzOTkyLDQxOTQzOTA3LC04NDUyNzE3NDYs
+LTE2OTc1NzA4NzRdfQ==
 -->
