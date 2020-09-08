@@ -117,14 +117,15 @@ It will throw error and in the firewall logs, you will find deny access to *sts.
 zrdfepirv2yto21prdstr02a.blob.core.windows.net
 zrdfepirv2yt1prdstr06a.blob.core.windows.net	
 
+
 I didn't record a new video for the new setup but the one done on December 2019 still valid as a guide with this article.
 [![](http://img.youtube.com/vi/U7Iw6g1_Rfg/0.jpg)](http://www.youtube.com/watch?v=U7Iw6g1_Rfg "")
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMjQzMjY0MjU1LC0yNzIxNTkxNTcsLTI2ND
-MzMDgyMywxNTM2MjMwMjM5LC03ODg4MzkzNCwxMjAzMzAzNDEy
-LC0xNDY2NDgxNjc3LDIwMDE0NTg0MTQsMTAyMTUxNTk2Niw1MT
-E1NTUwMyw0OTYxMDk3OTEsLTEwMzkxODUxODMsNjUyNzQwMjc0
-LC0xMzY5MTc5Mzk3LDE2MzU0MDgxODUsLTg5ODczNDI1MiwtOD
-YzNzM1Njc1LC00MDI2MDYxMzAsMTkwNjgwMzY5OCwxNzA1NjUy
-NDc2XX0=
+eyJoaXN0b3J5IjpbLTk3MTQwNDgxOSwtMjcyMTU5MTU3LC0yNj
+QzMzA4MjMsMTUzNjIzMDIzOSwtNzg4ODM5MzQsMTIwMzMwMzQx
+MiwtMTQ2NjQ4MTY3NywyMDAxNDU4NDE0LDEwMjE1MTU5NjYsNT
+ExNTU1MDMsNDk2MTA5NzkxLC0xMDM5MTg1MTgzLDY1Mjc0MDI3
+NCwtMTM2OTE3OTM5NywxNjM1NDA4MTg1LC04OTg3MzQyNTIsLT
+g2MzczNTY3NSwtNDAyNjA2MTMwLDE5MDY4MDM2OTgsMTcwNTY1
+MjQ3Nl19
 -->
