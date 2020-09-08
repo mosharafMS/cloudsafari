@@ -105,16 +105,17 @@ It will throw error and in the firewall logs, you will find deny access to *sts.
 - **deb.nodesource.com** this is a shortcut to [https://github.com/nodesource/distributions](https://github.com/nodesource/distributions) which has node distribution packages 
 - **files.pythonhosted.org**  This site hosts packages and documentation uploaded by authors of packages on the [Python Package Index](http://pypi.python.org/).  
 - **UDP protocol on port 123**  for Network Time Protocol ==> created a network rule for UDP protocol with destination port 123
+- **pypi.org** for python pypi packages 
 
 zrdfepirv2yto21prdstr02a.blob.core.windows.net	
 zrdfepirv2yt1prdstr06a.blob.core.windows.net	
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE0NjY0ODE2NzcsMjAwMTQ1ODQxNCwxMD
-IxNTE1OTY2LDUxMTU1NTAzLDQ5NjEwOTc5MSwtMTAzOTE4NTE4
-Myw2NTI3NDAyNzQsLTEzNjkxNzkzOTcsMTYzNTQwODE4NSwtOD
-k4NzM0MjUyLC04NjM3MzU2NzUsLTQwMjYwNjEzMCwxOTA2ODAz
-Njk4LDE3MDU2NTI0NzYsNTkzNjkzMjgsLTE0MTk0Mjg5NjMsOD
-Q5OTA3NTEyLDE4NTY3MTU3NywyMDA1MzUzOTkyLDQxOTQzOTA3
-XX0=
+eyJoaXN0b3J5IjpbMTIwMzMwMzQxMiwtMTQ2NjQ4MTY3NywyMD
+AxNDU4NDE0LDEwMjE1MTU5NjYsNTExNTU1MDMsNDk2MTA5Nzkx
+LC0xMDM5MTg1MTgzLDY1Mjc0MDI3NCwtMTM2OTE3OTM5NywxNj
+M1NDA4MTg1LC04OTg3MzQyNTIsLTg2MzczNTY3NSwtNDAyNjA2
+MTMwLDE5MDY4MDM2OTgsMTcwNTY1MjQ3Niw1OTM2OTMyOCwtMT
+QxOTQyODk2Myw4NDk5MDc1MTIsMTg1NjcxNTc3LDIwMDUzNTM5
+OTJdfQ==
 -->
