@@ -90,14 +90,15 @@ During my testing with Azure Firewall & Databricks, I found that the docs didn�
 -   snap packages → *.snapcraft.io
 -   terracotta → *.terracotta.org
 -   cloudflare → *.cloudflare.com
+-  ICMP Type 8 (Ping) to 172.217.13.164 which is an IP belongs to Google. I didn't see any docs for it but since it's just ping, I didn't see an issue with that traffic. It can be a heartbeat to check if the server has connectivity with the internet. 
 - 
 zrdfepirv2yto21prdstr02a.blob.core.windows.net	
 zrdfepirv2yt1prdstr06a.blob.core.windows.net	
 sts.amazonaws.com
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTEzNjkxNzkzOTcsMTYzNTQwODE4NSwtOD
-k4NzM0MjUyLC04NjM3MzU2NzUsLTQwMjYwNjEzMCwxOTA2ODAz
-Njk4LDE3MDU2NTI0NzYsNTkzNjkzMjgsLTE0MTk0Mjg5NjMsOD
-Q5OTA3NTEyLDE4NTY3MTU3NywyMDA1MzUzOTkyLDQxOTQzOTA3
-LC04NDUyNzE3NDYsLTE2OTc1NzA4NzRdfQ==
+eyJoaXN0b3J5IjpbNjUyNzQwMjc0LC0xMzY5MTc5Mzk3LDE2Mz
+U0MDgxODUsLTg5ODczNDI1MiwtODYzNzM1Njc1LC00MDI2MDYx
+MzAsMTkwNjgwMzY5OCwxNzA1NjUyNDc2LDU5MzY5MzI4LC0xND
+E5NDI4OTYzLDg0OTkwNzUxMiwxODU2NzE1NzcsMjAwNTM1Mzk5
+Miw0MTk0MzkwNywtODQ1MjcxNzQ2LC0xNjk3NTcwODc0XX0=
 -->
