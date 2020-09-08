@@ -1,4 +1,11 @@
+---
+layout: post  
+title:  "Azure Databricks Networking Deep Dive"  
+tags:  [ Azure, Databricks, Azure Firewall, Firewall, NSG, VNET ]  
+featured_image_thumbnail: assets/images/posts/2020/databricks_thumbnail.jpg  
+featured_image: assets/images/posts/2020/dbricks-vnet-architecture.png
 
+---
 # Azure Databricks Networking Deep dive
 
 This is an updated version of my article at [Medium.com](https://medium.com/cloudsafari-ca/azure-databricks-deployments-issues-3195ea8c7f56) originally written on December 2019 as some changes happened since then 
@@ -112,19 +119,11 @@ zrdfepirv2yto21prdstr02a.blob.core.windows.net
 zrdfepirv2yt1prdstr06a.blob.core.windows.net	
 
 <!--stackedit_data:
-eyJwcm9wZXJ0aWVzIjoibGF5b3V0OiBwb3N0XG50aXRsZTogIF
-wiQXp1cmUgRGF0YWJyaWNrcyBOZXR3b3JraW5nIERlZXAgRGl2
-ZVwiXG50YWdzOiBbIEF6dXJlLCBEYXRhYnJpY2tzLCBBenVyZS
-BGaXJld2FsbCwgRmlyZXdhbGwsIE5TRywgVk5FVCBdXG5mZWF0
-dXJlZF9pbWFnZV90aHVtYm5haWw6IGFzc2V0cy9pbWFnZXMvcG
-9zdHMvMjAyMC9kYXRhYnJpY2tzX3RodW1ibmFpbC5qcGdcbmZl
-YXR1cmVkX2ltYWdlOiBhc3NldHMvaW1hZ2VzL3Bvc3RzLzIwMj
-AvZGJyaWNrcy12bmV0LWFyY2hpdGVjdHVyZS5wbmdcbiIsImhp
-c3RvcnkiOlsxNTM2MjMwMjM5LC03ODg4MzkzNCwxMjAzMzAzND
-EyLC0xNDY2NDgxNjc3LDIwMDE0NTg0MTQsMTAyMTUxNTk2Niw1
-MTE1NTUwMyw0OTYxMDk3OTEsLTEwMzkxODUxODMsNjUyNzQwMj
-c0LC0xMzY5MTc5Mzk3LDE2MzU0MDgxODUsLTg5ODczNDI1Miwt
-ODYzNzM1Njc1LC00MDI2MDYxMzAsMTkwNjgwMzY5OCwxNzA1Nj
-UyNDc2LDU5MzY5MzI4LC0xNDE5NDI4OTYzLDg0OTkwNzUxMl19
-
+eyJoaXN0b3J5IjpbLTI2NDMzMDgyMywxNTM2MjMwMjM5LC03OD
+g4MzkzNCwxMjAzMzAzNDEyLC0xNDY2NDgxNjc3LDIwMDE0NTg0
+MTQsMTAyMTUxNTk2Niw1MTE1NTUwMyw0OTYxMDk3OTEsLTEwMz
+kxODUxODMsNjUyNzQwMjc0LC0xMzY5MTc5Mzk3LDE2MzU0MDgx
+ODUsLTg5ODczNDI1MiwtODYzNzM1Njc1LC00MDI2MDYxMzAsMT
+kwNjgwMzY5OCwxNzA1NjUyNDc2LDU5MzY5MzI4LC0xNDE5NDI4
+OTYzXX0=
 -->
