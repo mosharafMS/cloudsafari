@@ -118,11 +118,10 @@ zrdfepirv2yto21prdstr02a.blob.core.windows.net
 	
 zrdfepirv2yt1prdstr06a.blob.core.windows.net	
 
-I didn't record a new video for the new setup bu
-
+I didn't record a new video for the new setup but the one done on December 2019 still valid as a guide with this article.
 [![](http://img.youtube.com/vi/U7Iw6g1_Rfg/0.jpg)](http://www.youtube.com/watch?v=U7Iw6g1_Rfg "")
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTI3Nzg1NTg4MSwtMjY0MzMwODIzLDE1Mz
+eyJoaXN0b3J5IjpbLTI3MjE1OTE1NywtMjY0MzMwODIzLDE1Mz
 YyMzAyMzksLTc4ODgzOTM0LDEyMDMzMDM0MTIsLTE0NjY0ODE2
 NzcsMjAwMTQ1ODQxNCwxMDIxNTE1OTY2LDUxMTU1NTAzLDQ5Nj
 EwOTc5MSwtMTAzOTE4NTE4Myw2NTI3NDAyNzQsLTEzNjkxNzkz
