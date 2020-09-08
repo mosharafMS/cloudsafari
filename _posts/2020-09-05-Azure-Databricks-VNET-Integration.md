@@ -113,19 +113,18 @@ It will throw error and in the firewall logs, you will find deny access to *sts.
 - **files.pythonhosted.org**  This site hosts packages and documentation uploaded by authors of packages on the [Python Package Index](http://pypi.python.org/).  
 - **UDP protocol on port 123**  for Network Time Protocol ==> created a network rule for UDP protocol with destination port 123
 - **pypi.org** for python pypi packages 
-
+- In the testing we found two storage account not related to Databricks 
 zrdfepirv2yto21prdstr02a.blob.core.windows.net
-	
 zrdfepirv2yt1prdstr06a.blob.core.windows.net	
 
 I didn't record a new video for the new setup but the one done on December 2019 still valid as a guide with this article.
 [![](http://img.youtube.com/vi/U7Iw6g1_Rfg/0.jpg)](http://www.youtube.com/watch?v=U7Iw6g1_Rfg "")
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTI3MjE1OTE1NywtMjY0MzMwODIzLDE1Mz
-YyMzAyMzksLTc4ODgzOTM0LDEyMDMzMDM0MTIsLTE0NjY0ODE2
-NzcsMjAwMTQ1ODQxNCwxMDIxNTE1OTY2LDUxMTU1NTAzLDQ5Nj
-EwOTc5MSwtMTAzOTE4NTE4Myw2NTI3NDAyNzQsLTEzNjkxNzkz
-OTcsMTYzNTQwODE4NSwtODk4NzM0MjUyLC04NjM3MzU2NzUsLT
-QwMjYwNjEzMCwxOTA2ODAzNjk4LDE3MDU2NTI0NzYsNTkzNjkz
-MjhdfQ==
+eyJoaXN0b3J5IjpbMjQzMjY0MjU1LC0yNzIxNTkxNTcsLTI2ND
+MzMDgyMywxNTM2MjMwMjM5LC03ODg4MzkzNCwxMjAzMzAzNDEy
+LC0xNDY2NDgxNjc3LDIwMDE0NTg0MTQsMTAyMTUxNTk2Niw1MT
+E1NTUwMyw0OTYxMDk3OTEsLTEwMzkxODUxODMsNjUyNzQwMjc0
+LC0xMzY5MTc5Mzk3LDE2MzU0MDgxODUsLTg5ODczNDI1MiwtOD
+YzNzM1Njc1LC00MDI2MDYxMzAsMTkwNjgwMzY5OCwxNzA1NjUy
+NDc2XX0=
 -->
