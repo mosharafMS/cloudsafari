@@ -101,13 +101,13 @@ OPTIONS (path "/databricks-datasets/Rdatasets/data-001/csv/ggplot2/diamonds.csv"
 
 It will throw error and in the firewall logs, you will find deny access to *sts.amazonaws.com* which means that the sample data still in S3 buckets. I didn't allow this URL in this testing round but if you did, expect to have another URL or two to show up. These are the exact buckets that hosts the sample dataset. They will be * < bucket name>.s3.amazonaws.com*
 
-- **nvidia.github.io** used 
+- **nvidia.github.io** used to pull nvidia drivers. In my testing, I didn't see any clusters that has GPUs but still the traffic to nvidia github pages was recorde
  
 zrdfepirv2yto21prdstr02a.blob.core.windows.net	
 zrdfepirv2yt1prdstr06a.blob.core.windows.net	
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbNDMwMjUzMjg4LDQ5NjEwOTc5MSwtMTAzOT
+eyJoaXN0b3J5IjpbNjM1NDk0ODExLDQ5NjEwOTc5MSwtMTAzOT
 E4NTE4Myw2NTI3NDAyNzQsLTEzNjkxNzkzOTcsMTYzNTQwODE4
 NSwtODk4NzM0MjUyLC04NjM3MzU2NzUsLTQwMjYwNjEzMCwxOT
 A2ODAzNjk4LDE3MDU2NTI0NzYsNTkzNjkzMjgsLTE0MTk0Mjg5
