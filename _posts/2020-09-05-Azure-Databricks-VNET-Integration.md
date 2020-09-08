@@ -1,4 +1,6 @@
+---
 
+---
 # Azure Databricks Networking Deep dive
 
 This is an updated version of my article at [Medium.com](https://medium.com/cloudsafari-ca/azure-databricks-deployments-issues-3195ea8c7f56) originally written on December 2019 as some changes happened since then 
@@ -107,15 +109,16 @@ It will throw error and in the firewall logs, you will find deny access to *sts.
 - **UDP protocol on port 123**  for Network Time Protocol ==> created a network rule for UDP protocol with destination port 123
 - **pypi.org** for python pypi packages 
 
-zrdfepirv2yto21prdstr02a.blob.core.windows.net	
+zrdfepirv2yto21prdstr02a.blob.core.windows.net
+	
 zrdfepirv2yt1prdstr06a.blob.core.windows.net	
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTIwMzMwMzQxMiwtMTQ2NjQ4MTY3NywyMD
-AxNDU4NDE0LDEwMjE1MTU5NjYsNTExNTU1MDMsNDk2MTA5Nzkx
-LC0xMDM5MTg1MTgzLDY1Mjc0MDI3NCwtMTM2OTE3OTM5NywxNj
-M1NDA4MTg1LC04OTg3MzQyNTIsLTg2MzczNTY3NSwtNDAyNjA2
-MTMwLDE5MDY4MDM2OTgsMTcwNTY1MjQ3Niw1OTM2OTMyOCwtMT
-QxOTQyODk2Myw4NDk5MDc1MTIsMTg1NjcxNTc3LDIwMDUzNTM5
-OTJdfQ==
+eyJoaXN0b3J5IjpbMTkwNDg2NzY3OCwxMjAzMzAzNDEyLC0xND
+Y2NDgxNjc3LDIwMDE0NTg0MTQsMTAyMTUxNTk2Niw1MTE1NTUw
+Myw0OTYxMDk3OTEsLTEwMzkxODUxODMsNjUyNzQwMjc0LC0xMz
+Y5MTc5Mzk3LDE2MzU0MDgxODUsLTg5ODczNDI1MiwtODYzNzM1
+Njc1LC00MDI2MDYxMzAsMTkwNjgwMzY5OCwxNzA1NjUyNDc2LD
+U5MzY5MzI4LC0xNDE5NDI4OTYzLDg0OTkwNzUxMiwxODU2NzE1
+NzddfQ==
 -->
