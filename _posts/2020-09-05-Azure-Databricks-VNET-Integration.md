@@ -98,15 +98,15 @@ CREATE TABLE diamonds
 USING csv
 OPTIONS (path "/databricks-datasets/Rdatasets/data-001/csv/ggplot2/diamonds.csv", header "true")
 ```
- It will throw error and in the firewall logs, you will find deny access to *sts.amazonaws.com* which means that the sample data still in S3 buckets. I didn't allow this URL in this testing round but if you did, expect to have another 
+ It will throw error and in the firewall logs, you will find deny access to *sts.amazonaws.com* which means that the sample data still in S3 buckets. I didn't allow this URL in this testing round but if you did, expect to have another URL or two to show up. These are the exact buckets that hosts the sample dataset. They will be **.s3.amazonaws.com* 
 zrdfepirv2yto21prdstr02a.blob.core.windows.net	
 zrdfepirv2yt1prdstr06a.blob.core.windows.net	
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTc0MjIyMzI0OCwtMTAzOTE4NTE4Myw2NT
-I3NDAyNzQsLTEzNjkxNzkzOTcsMTYzNTQwODE4NSwtODk4NzM0
-MjUyLC04NjM3MzU2NzUsLTQwMjYwNjEzMCwxOTA2ODAzNjk4LD
-E3MDU2NTI0NzYsNTkzNjkzMjgsLTE0MTk0Mjg5NjMsODQ5OTA3
-NTEyLDE4NTY3MTU3NywyMDA1MzUzOTkyLDQxOTQzOTA3LC04ND
-UyNzE3NDYsLTE2OTc1NzA4NzRdfQ==
+eyJoaXN0b3J5IjpbNDk2MTA5NzkxLC0xMDM5MTg1MTgzLDY1Mj
+c0MDI3NCwtMTM2OTE3OTM5NywxNjM1NDA4MTg1LC04OTg3MzQy
+NTIsLTg2MzczNTY3NSwtNDAyNjA2MTMwLDE5MDY4MDM2OTgsMT
+cwNTY1MjQ3Niw1OTM2OTMyOCwtMTQxOTQyODk2Myw4NDk5MDc1
+MTIsMTg1NjcxNTc3LDIwMDUzNTM5OTIsNDE5NDM5MDcsLTg0NT
+I3MTc0NiwtMTY5NzU3MDg3NF19
 -->
