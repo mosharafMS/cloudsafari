@@ -17,9 +17,12 @@ Let's take a quick example, in the picture below, a simple logic pipeline that s
 ![simple logic pipeline](/assets/images/posts/2020/adf-logic.png)
 
 Inside the true branch of the *If Condition* add *Web* activity (under general) 
-![enter image description here](/assets/images/posts/2020/adf-web-activity.png)
+![Web Activity](/assets/images/posts/2020/adf-web-activity.png)
+
+**Now what are we trying to do?** 
+Since there's no activity then we need to call the ADF REST API which is part of the Azure Resource Manager (https://management.azure.com)
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbNzEzMzI0OTE4LDE5Njc1ODY5NTksOTA2Nj
-I0MTY5XX0=
+eyJoaXN0b3J5IjpbLTQzNDkwMjIzMyw3MTMzMjQ5MTgsMTk2Nz
+U4Njk1OSw5MDY2MjQxNjldfQ==
 -->
