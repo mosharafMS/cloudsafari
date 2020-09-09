@@ -4,6 +4,6 @@ title: About
 featured_image: /assets/images/pages/about.jpg
 ---
 
-{% author.bio %}
+{% site.author.bio %}
 
 *Thank You for reading!*
