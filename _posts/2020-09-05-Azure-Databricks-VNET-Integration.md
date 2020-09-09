@@ -126,13 +126,13 @@ I didn't record a new video for the new setup but the one done on December 2019 
 ### References
 I've added the NetworkRules & ApplicationRules of Azure Firewall in these gists
 
-(% gist 1ae634e2df771b7eec453ce2a35ba727 %}
+<script src="https://gist.github.com/mosharafMS/1ae634e2df771b7eec453ce2a35ba727.js"></script>
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTE3NjQ2NTg2OSwtMTUwMDE5ODk0OSw4NT
-AwMTg1NzYsLTc4ODIwODkwMCwtMjcyMTU5MTU3LC0yNjQzMzA4
-MjMsMTUzNjIzMDIzOSwtNzg4ODM5MzQsMTIwMzMwMzQxMiwtMT
-Q2NjQ4MTY3NywyMDAxNDU4NDE0LDEwMjE1MTU5NjYsNTExNTU1
-MDMsNDk2MTA5NzkxLC0xMDM5MTg1MTgzLDY1Mjc0MDI3NCwtMT
-M2OTE3OTM5NywxNjM1NDA4MTg1LC04OTg3MzQyNTIsLTg2Mzcz
-NTY3NV19
+eyJoaXN0b3J5IjpbOTE0NzE2OTU3LDExNzY0NjU4NjksLTE1MD
+AxOTg5NDksODUwMDE4NTc2LC03ODgyMDg5MDAsLTI3MjE1OTE1
+NywtMjY0MzMwODIzLDE1MzYyMzAyMzksLTc4ODgzOTM0LDEyMD
+MzMDM0MTIsLTE0NjY0ODE2NzcsMjAwMTQ1ODQxNCwxMDIxNTE1
+OTY2LDUxMTU1NTAzLDQ5NjEwOTc5MSwtMTAzOTE4NTE4Myw2NT
+I3NDAyNzQsLTEzNjkxNzkzOTcsMTYzNTQwODE4NSwtODk4NzM0
+MjUyXX0=
 -->
