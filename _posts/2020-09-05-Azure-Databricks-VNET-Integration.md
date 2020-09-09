@@ -114,14 +114,14 @@ It will throw error and in the firewall logs, you will find deny access to *sts.
 - **UDP protocol on port 123**  for Network Time Protocol ==> created a network rule for UDP protocol with destination port 123
 - **pypi.org** for python pypi packages 
 - In the testing we found two storage account not related to Databricks 
-zrdfepirv2yto21prdstr02a.blob.core.windows.net
-zrdfepirv2yt1prdstr06a.blob.core.windows.net	
-I'm still waiting final confirmation from the Azure monitor team but all the investigations leading to these are used by the Azure Monitor. There's a trick in the AzureMonitor service tag, as per the [docs](https://docs.microsoft.com/en-us/azure/virtual-network/service-tags-overview) **AzureMonitor** service tag has a dependency on the **Storage** tag which means 
+*zrdfepirv2yto21prdstr02a.blob.core.windows.net*
+*zrdfepirv2yt1prdstr06a.blob.core.windows.net*	
+I'm still waiting final confirmation from the Azure monitor team but all the investigations leading to these are used by the Azure Monitor. There's a trick in the AzureMonitor service tag, as per the [docs](https://docs.microsoft.com/en-us/azure/virtual-network/service-tags-overview) **AzureMonitor** service tag has a dependency on the **Storage** tag which means to be on the safe side you need to add the storage service tag in your Azure Firewall Network rules but that's too much to allow all the traffic to all the storage accounts in a region. In my customer's deployments, we depending on 
 
 I didn't record a new video for the new setup but the one done on December 2019 still valid as a guide with this article.
 [![](http://img.youtube.com/vi/U7Iw6g1_Rfg/0.jpg)](http://www.youtube.com/watch?v=U7Iw6g1_Rfg "")
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMjgwMTI0NjE0LC03ODgyMDg5MDAsLTI3Mj
+eyJoaXN0b3J5IjpbMjA0OTY5ODM4LC03ODgyMDg5MDAsLTI3Mj
 E1OTE1NywtMjY0MzMwODIzLDE1MzYyMzAyMzksLTc4ODgzOTM0
 LDEyMDMzMDM0MTIsLTE0NjY0ODE2NzcsMjAwMTQ1ODQxNCwxMD
 IxNTE1OTY2LDUxMTU1NTAzLDQ5NjEwOTc5MSwtMTAzOTE4NTE4
