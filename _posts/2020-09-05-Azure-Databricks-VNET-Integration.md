@@ -1,6 +1,6 @@
 ---
 layout: post  
-title:  "Azure Databricks Networking Deep Dive"  
+title:  ""  
 tags:  [ Azure, Databricks, Azure Firewall, Firewall, NSG, VNET ]  
 featured_image_thumbnail: assets/images/posts/2020/databricks_thumbnail.jpg  
 
@@ -137,11 +137,11 @@ I've added the NetworkRules & ApplicationRules of Azure Firewall in these gists
 
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMzAyNzkxMTYyLDExNzY0NjU4NjksLTE1MD
-AxOTg5NDksODUwMDE4NTc2LC03ODgyMDg5MDAsLTI3MjE1OTE1
-NywtMjY0MzMwODIzLDE1MzYyMzAyMzksLTc4ODgzOTM0LDEyMD
-MzMDM0MTIsLTE0NjY0ODE2NzcsMjAwMTQ1ODQxNCwxMDIxNTE1
-OTY2LDUxMTU1NTAzLDQ5NjEwOTc5MSwtMTAzOTE4NTE4Myw2NT
-I3NDAyNzQsLTEzNjkxNzkzOTcsMTYzNTQwODE4NSwtODk4NzM0
-MjUyXX0=
+eyJoaXN0b3J5IjpbLTE3MDQ0ODUzMjUsMzAyNzkxMTYyLDExNz
+Y0NjU4NjksLTE1MDAxOTg5NDksODUwMDE4NTc2LC03ODgyMDg5
+MDAsLTI3MjE1OTE1NywtMjY0MzMwODIzLDE1MzYyMzAyMzksLT
+c4ODgzOTM0LDEyMDMzMDM0MTIsLTE0NjY0ODE2NzcsMjAwMTQ1
+ODQxNCwxMDIxNTE1OTY2LDUxMTU1NTAzLDQ5NjEwOTc5MSwtMT
+AzOTE4NTE4Myw2NTI3NDAyNzQsLTEzNjkxNzkzOTcsMTYzNTQw
+ODE4NV19
 -->
