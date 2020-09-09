@@ -15,7 +15,8 @@ The challenge is there's no activity in ADF that cancels execution. In this case
 
 Let's take a quick example
 
+
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTQ0MTc0ODQ2NywxOTY3NTg2OTU5LDkwNj
-YyNDE2OV19
+eyJoaXN0b3J5IjpbMjc5NDI1ODg5LDE5Njc1ODY5NTksOTA2Nj
+I0MTY5XX0=
 -->
