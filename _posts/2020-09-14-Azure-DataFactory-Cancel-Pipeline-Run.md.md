@@ -13,10 +13,10 @@ In some cases you want to end the [Azure Data Factory](https://docs.microsoft.co
 
 The challenge is there's no activity in ADF that cancels execution. In this case, the [web activity](https://docs.microsoft.com/en-us/azure/data-factory/control-flow-web-activity) comes handy 
 
-Let's take a quick example
-
+Let's take a quick example, in the picture below, a simple logic pipeline that sets a variable to true and then based on the value of the variable, it has if 
+![simple logic pipeline](/assets/images/posts/2020/adf-logic.png)
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMjc5NDI1ODg5LDE5Njc1ODY5NTksOTA2Nj
-I0MTY5XX0=
+eyJoaXN0b3J5IjpbLTQ2MjA1OTgyOSwxOTY3NTg2OTU5LDkwNj
+YyNDE2OV19
 -->
