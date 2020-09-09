@@ -116,16 +116,21 @@ It will throw error and in the firewall logs, you will find deny access to *sts.
 - **Azure Monitor** In the testing we found two storage account not related to Databricks 
 *zrdfepirv2yto21prdstr02a.blob.core.windows.net*
 *zrdfepirv2yt1prdstr06a.blob.core.windows.net*	
-I'm still waiting final confirmation from the Azure monitor team but all the investigations leading to these are used by the Azure Monitor. There's a trick in the AzureMonitor service tag, as per the [docs](https://docs.microsoft.com/en-us/azure/virtual-network/service-tags-overview) **AzureMonitor** service tag has a dependency on the **Storage** tag which means to be on the safe side you need to add the storage service tag in your Azure Firewall Network rules but that's too much to allow all the traffic to all the storage accounts in a region. In my customer's deployments, we depended on reading the logs with denied access and add these storage accounts one by one. This way is of course more restrictive and may fail after while when these storage accounts change but it's better for security.
+I'm still waiting final confirmation from the Azure monitor team but all the investigations leading to these are used by the Azure Monitor linux agent.
+**Buy why we have a deny on Azure Monitor storage accounts when we enable the AzureMonitor service tag?**
+ There's a trick in the AzureMonitor service tag, as per the [docs](https://docs.microsoft.com/en-us/azure/virtual-network/service-tags-overview) **AzureMonitor** service tag has a dependency on the **Storage** tag which means to be on the safe side you need to add the storage service tag in your Azure Firewall Network rules but that's too much to allow all the traffic to all the storage accounts in a region. In my customer's deployments, we depended on reading the logs with denied access and add these storage accounts one by one. This way is of course more restrictive and may fail after while when these storage accounts change but it's better for security.
 
 I didn't record a new video for the new setup but the one done on December 2019 still valid as a guide with this article.
 [![](http://img.youtube.com/vi/U7Iw6g1_Rfg/0.jpg)](http://www.youtube.com/watch?v=U7Iw6g1_Rfg "")
+
+### References
+I've added the N
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbODUwMDE4NTc2LC03ODgyMDg5MDAsLTI3Mj
-E1OTE1NywtMjY0MzMwODIzLDE1MzYyMzAyMzksLTc4ODgzOTM0
-LDEyMDMzMDM0MTIsLTE0NjY0ODE2NzcsMjAwMTQ1ODQxNCwxMD
-IxNTE1OTY2LDUxMTU1NTAzLDQ5NjEwOTc5MSwtMTAzOTE4NTE4
-Myw2NTI3NDAyNzQsLTEzNjkxNzkzOTcsMTYzNTQwODE4NSwtOD
-k4NzM0MjUyLC04NjM3MzU2NzUsLTQwMjYwNjEzMCwxOTA2ODAz
-Njk4XX0=
+eyJoaXN0b3J5IjpbLTE4MjcwMDY0ODMsODUwMDE4NTc2LC03OD
+gyMDg5MDAsLTI3MjE1OTE1NywtMjY0MzMwODIzLDE1MzYyMzAy
+MzksLTc4ODgzOTM0LDEyMDMzMDM0MTIsLTE0NjY0ODE2NzcsMj
+AwMTQ1ODQxNCwxMDIxNTE1OTY2LDUxMTU1NTAzLDQ5NjEwOTc5
+MSwtMTAzOTE4NTE4Myw2NTI3NDAyNzQsLTEzNjkxNzkzOTcsMT
+YzNTQwODE4NSwtODk4NzM0MjUyLC04NjM3MzU2NzUsLTQwMjYw
+NjEzMF19
 -->
