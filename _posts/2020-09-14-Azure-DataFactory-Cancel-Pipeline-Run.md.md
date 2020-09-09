@@ -13,6 +13,9 @@ In some cases you want to end the [Azure Data Factory](https://docs.microsoft.co
 
 The challenge is there's no activity in ADF that cancels execution. In this case, the [web activity](https://docs.microsoft.com/en-us/azure/data-factory/control-flow-web-activity) comes handy 
 
+Let's take a quick example
+
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTk2NzU4Njk1OSw5MDY2MjQxNjldfQ==
+eyJoaXN0b3J5IjpbMTQ0MTc0ODQ2NywxOTY3NTg2OTU5LDkwNj
+YyNDE2OV19
 -->
