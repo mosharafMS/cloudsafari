@@ -116,16 +116,16 @@ It will throw error and in the firewall logs, you will find deny access to *sts.
 - In the testing we found two storage account not related to Databricks 
 zrdfepirv2yto21prdstr02a.blob.core.windows.net
 zrdfepirv2yt1prdstr06a.blob.core.windows.net	
-I'm still waiting final confirmation from the Azure monitor team but all the investigations leading to these are used by the Azure Monitor. There's a trick in the AzureMonitor service tag, as per the 
+I'm still waiting final confirmation from the Azure monitor team but all the investigations leading to these are used by the Azure Monitor. There's a trick in the AzureMonitor service tag, as per the [docs](https://docs.microsoft.com/en-us/azure/virtual-network/service-tags-overview) **AzureMonitor** service tag has a dependency on the **Storage** tag which means 
 
 I didn't record a new video for the new setup but the one done on December 2019 still valid as a guide with this article.
 [![](http://img.youtube.com/vi/U7Iw6g1_Rfg/0.jpg)](http://www.youtube.com/watch?v=U7Iw6g1_Rfg "")
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTY3NDQwODcwMywtNzg4MjA4OTAwLC0yNz
-IxNTkxNTcsLTI2NDMzMDgyMywxNTM2MjMwMjM5LC03ODg4Mzkz
-NCwxMjAzMzAzNDEyLC0xNDY2NDgxNjc3LDIwMDE0NTg0MTQsMT
-AyMTUxNTk2Niw1MTE1NTUwMyw0OTYxMDk3OTEsLTEwMzkxODUx
-ODMsNjUyNzQwMjc0LC0xMzY5MTc5Mzk3LDE2MzU0MDgxODUsLT
-g5ODczNDI1MiwtODYzNzM1Njc1LC00MDI2MDYxMzAsMTkwNjgw
-MzY5OF19
+eyJoaXN0b3J5IjpbMjgwMTI0NjE0LC03ODgyMDg5MDAsLTI3Mj
+E1OTE1NywtMjY0MzMwODIzLDE1MzYyMzAyMzksLTc4ODgzOTM0
+LDEyMDMzMDM0MTIsLTE0NjY0ODE2NzcsMjAwMTQ1ODQxNCwxMD
+IxNTE1OTY2LDUxMTU1NTAzLDQ5NjEwOTc5MSwtMTAzOTE4NTE4
+Myw2NTI3NDAyNzQsLTEzNjkxNzkzOTcsMTYzNTQwODE4NSwtOD
+k4NzM0MjUyLC04NjM3MzU2NzUsLTQwMjYwNjEzMCwxOTA2ODAz
+Njk4XX0=
 -->
