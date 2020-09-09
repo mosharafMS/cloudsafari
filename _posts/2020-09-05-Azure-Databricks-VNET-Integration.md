@@ -3,8 +3,6 @@ layout: post
 title:  "Azure Databricks Networking Deep Dive"  
 tags:  [ Azure, Databricks, Azure Firewall, Firewall, NSG, VNET ]  
 featured_image_thumbnail: assets/images/posts/2020/databricks_thumbnail.jpg  
-featured_image: assets/images/posts/2020/dbricks-vnet-architecture.png
-
 ---
 # Azure Databricks Networking Deep dive
 
