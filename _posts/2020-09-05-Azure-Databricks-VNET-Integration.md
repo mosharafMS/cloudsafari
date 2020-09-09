@@ -126,15 +126,15 @@ I didn't record a new video for the new setup but the one done on December 2019 
 ### References
 I've added the NetworkRules & ApplicationRules of Azure Firewall in these gists
 **Network Rules**
-{% gist 1ae634e2df771b7eec453ce2a35ba727%}
+{% gist 1ae634e2df771b7eec453ce2a35ba727 %}
 
 
 **Application Rules**
-
+{% gist 158f9dada9cb10657f8f0dd838138df4 %}
 
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTMxODcyMDk1MCwxMTc2NDY1ODY5LC0xNT
+eyJoaXN0b3J5IjpbLTgwMjU4MDM5NCwxMTc2NDY1ODY5LC0xNT
 AwMTk4OTQ5LDg1MDAxODU3NiwtNzg4MjA4OTAwLC0yNzIxNTkx
 NTcsLTI2NDMzMDgyMywxNTM2MjMwMjM5LC03ODg4MzkzNCwxMj
 AzMzAzNDEyLC0xNDY2NDgxNjc3LDIwMDE0NTg0MTQsMTAyMTUx
