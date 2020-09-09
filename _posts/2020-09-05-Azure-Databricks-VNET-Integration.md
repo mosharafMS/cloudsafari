@@ -4,7 +4,6 @@ title:  "Azure Databricks Networking Deep Dive"
 tags:  [ Azure, Databricks, Azure Firewall, Firewall, NSG, VNET ]  
 featured_image_thumbnail: assets/images/posts/2020/databricks_thumbnail.jpg  
 ---
-# Azure Databricks Networking Deep dive
 
 This is an updated version of my article at [Medium.com](https://medium.com/cloudsafari-ca/azure-databricks-deployments-issues-3195ea8c7f56) originally written on December 2019 as some changes happened since then 
 
