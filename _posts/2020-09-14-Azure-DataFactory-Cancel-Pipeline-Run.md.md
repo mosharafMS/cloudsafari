@@ -9,8 +9,10 @@ category: Data-Engineering
 
 ---
 
-In some cases you want to end the [Azure Data Factory](https://docs.microsoft.com/en-us/azure/data-factory/) pipeline execution based on a logic in the pipeline itself. For example, when there's no record coming from one of the inputs da
+In some cases you want to end the [Azure Data Factory](https://docs.microsoft.com/en-us/azure/data-factory/) (ADF) pipeline execution based on a logic in the pipeline itself. For example, when there's no record coming from one of the inputs datasets then you need to fail quickly to either reduce cost or to avoid any logical errors. 
+
+The challenge is there's no activity in ADF that cance
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE1ODkzMTUwNDEsOTA2NjI0MTY5XX0=
+eyJoaXN0b3J5IjpbMjYzNzcwOTE3LDkwNjYyNDE2OV19
 -->
