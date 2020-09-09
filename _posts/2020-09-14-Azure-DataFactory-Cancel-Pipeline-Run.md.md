@@ -20,9 +20,11 @@ Inside the true branch of the *If Condition* add *Web* activity (under general)
 ![Web Activity](/assets/images/posts/2020/adf-web-activity.png)
 
 **Now what are we trying to do?** 
-Since there's no activity then we need to call the ADF REST API which is part of the Azure Resource Manager (https://management.azure.com)
+Since there's no activity then we need to call the ADF REST API which is part of the Azure Resource Manager (https://management.azure.com) .
+The API we are interested in is the cancel pipeline run API 
+[https://docs.microsoft.com/en-us/rest/api/datafactory/pipelineruns/cancel](https://docs.microsoft.com/en-us/rest/api/datafactory/pipelineruns/cancel)
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTQzNDkwMjIzMyw3MTMzMjQ5MTgsMTk2Nz
+eyJoaXN0b3J5IjpbMTQyNjIxMjg4MSw3MTMzMjQ5MTgsMTk2Nz
 U4Njk1OSw5MDY2MjQxNjldfQ==
 -->
