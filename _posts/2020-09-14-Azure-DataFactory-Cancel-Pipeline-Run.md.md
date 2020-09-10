@@ -19,15 +19,18 @@ Let's take a quick example, in the picture below, a simple logic pipeline that s
 Inside the true branch of the *If Condition* add *Web* activity (under general) 
 ![Web Activity](/assets/images/posts/2020/adf-web-activity.png)
 
-**Now what are we trying to do?** 
+### Now what are we trying to do?
 Since there's no activity then we need to call the ADF REST API which is part of the Azure Resource Manager (https://management.azure.com) .
 The API we are interested in is the [Cancel Pipeline Run API](https://docs.microsoft.com/en-us/rest/api/datafactory/pipelineruns/cancel) 
 
 The API format 
 POST https://management.azure.com/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/pipelineruns/{runId}/cancel?api-version=2018-06-01
-Luckily the {factoryName} and the {runId} can be obtained using ADF functions during runtime (with a catch) 
+Luckily the {factoryName} and the {runId} can be obtained using ADF functions during runtime (with a catch) using `pipeline().DataFactory` and `pipeline().RunId` respectively 
+
+**What's the catch?** 
+The run
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE5MDYyNTcyODcsLTE4NDAwNDg0NzYsNz
-EzMzI0OTE4LDE5Njc1ODY5NTksOTA2NjI0MTY5XX0=
+eyJoaXN0b3J5IjpbMTkwMDkwNzM5NywtMTg0MDA0ODQ3Niw3MT
+MzMjQ5MTgsMTk2NzU4Njk1OSw5MDY2MjQxNjldfQ==
 -->
