@@ -36,10 +36,15 @@ That makes the REST call like this
 **How about authentication?**
 Correct, ARM REST API calling can be daunting because of the oauth authentication workflows. Fortunately the *Web* activity supports [*Managed (Service) Identity*](https://docs.microsoft.com/en-us/azure/data-factory/data-factory-service-identity) . In nutshell, every Data Factory instance has a service identity created in Azure AD to be used by this instance. 
 
-![W](/assets/images/posts/2020/ADF-web-activity-settings.png)
+The settings page should look like this 
 
+![Web Activity Settings](/assets/images/posts/2020/ADF-web-activity-settings.png)
+
+Note that the `resource` is the resource that you want to connect to which is the Azure Resource Manager (ARM) API ==> https://management.azure.com 
+
+If you run 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE2NDIyNjYwNDAsMTg4NDMxMDgzLC0xOD
+eyJoaXN0b3J5IjpbLTE2MDk2OTE1MjYsMTg4NDMxMDgzLC0xOD
 QwMDQ4NDc2LDcxMzMyNDkxOCwxOTY3NTg2OTU5LDkwNjYyNDE2
 OV19
 -->
