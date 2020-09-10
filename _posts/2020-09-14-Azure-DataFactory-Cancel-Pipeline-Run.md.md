@@ -42,11 +42,13 @@ The settings page should look like this
 
 Note that the `resource` is the resource that you want to connect to which is the Azure Resource Manager (ARM) API ==> https://management.azure.com 
 
-If you run the pipeline this way, probably you will get access denied error because this managed identity doesn't have permissions to stop the pipeline run for this data factory. To grant this permission, assign the managed identity 
+If you run the pipeline this way, probably you will get access denied error because this managed identity doesn't have permissions to stop the pipeline run for this data factory. To grant this permission, assign the managed identity the Data Factory contributor Role (least privileged) or Contributor role (more privileged) 
 
-the name of it will be the same name as the data factory
+> The Managed Identity name is the same name as the data factory
+
+
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTEzODAzNzE0MjksMTg4NDMxMDgzLC0xOD
+eyJoaXN0b3J5IjpbLTIwMTk3MTE1ODksMTg4NDMxMDgzLC0xOD
 QwMDQ4NDc2LDcxMzMyNDkxOCwxOTY3NTg2OTU5LDkwNjYyNDE2
 OV19
 -->
