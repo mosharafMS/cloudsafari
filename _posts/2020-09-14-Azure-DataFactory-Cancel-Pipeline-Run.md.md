@@ -34,9 +34,12 @@ That makes the REST call like this
     @concat('https://management.azure.com/subscriptions/***subscriptionID***/resourceGroups/***resource group name***/providers/Microsoft.DataFactory/factories/',pipeline().DataFactory,'/pipelineruns/',pipeline().RunId,'/cancel?api-version=2018-06-01')
 
 **How about authentication?**
-Correct, ARM REST API calling can be daunting because of the oauth authentication workflows. Fortunately the *Web* activity supports [*Managed (Service) Identity*](https://docs.microsoft.com/en-us/azure/data-factory/data-factory-service-identity)  
+Correct, ARM REST API calling can be daunting because of the oauth authentication workflows. Fortunately the *Web* activity supports [*Managed (Service) Identity*](https://docs.microsoft.com/en-us/azure/data-factory/data-factory-service-identity) . In nutshell, every Data Factory instance has a service identity created in Azure AD to be used by this instance. 
+
+![W](/assets/images/posts/2020/ADF-web-activity-settings.png)
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTg4NDMxMDgzLC0xODQwMDQ4NDc2LDcxMz
-MyNDkxOCwxOTY3NTg2OTU5LDkwNjYyNDE2OV19
+eyJoaXN0b3J5IjpbLTE2NDIyNjYwNDAsMTg4NDMxMDgzLC0xOD
+QwMDQ4NDc2LDcxMzMyNDkxOCwxOTY3NTg2OTU5LDkwNjYyNDE2
+OV19
 -->
