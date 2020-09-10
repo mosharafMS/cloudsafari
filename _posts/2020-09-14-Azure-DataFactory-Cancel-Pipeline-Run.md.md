@@ -29,9 +29,14 @@ Luckily the {factoryName} and the {runId} can be obtained using ADF functions du
 
 **What's the catch?** 
 The `RunId` doesn't work when execute the pipeline under debug mode. You need to trigger the pipeline to get the correct `RunId`
-That makes the REST 
+That makes the REST call like this 
+
+    @concat('https://management.azure.com/subscriptions/***subscriptionID***/resourceGroups/***resource group name***/providers/Microsoft.DataFactory/factories/',pipeline().DataFactory,'/pipelineruns/',pipeline().RunId,'/cancel?api-version=2018-06-01')
+
+**How about authentication?**
+Correct, ARM REST
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbNjI0MzQ3MDQ3LC0xODQwMDQ4NDc2LDcxMz
+eyJoaXN0b3J5IjpbNzcxMzc5NjQ3LC0xODQwMDQ4NDc2LDcxMz
 MyNDkxOCwxOTY3NTg2OTU5LDkwNjYyNDE2OV19
 -->
