@@ -28,9 +28,10 @@ POST https://management.azure.com/subscriptions/{subscriptionId}/resourceGroups/
 Luckily the {factoryName} and the {runId} can be obtained using ADF functions during runtime (with a catch) using `pipeline().DataFactory` and `pipeline().RunId` respectively 
 
 **What's the catch?** 
-The run
+The `RunId` doesn't work when execute the pipeline under debug mode. You need to trigger the pipeline to get the correct `RunId`
+That makes the REST 
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTkwMDkwNzM5NywtMTg0MDA0ODQ3Niw3MT
-MzMjQ5MTgsMTk2NzU4Njk1OSw5MDY2MjQxNjldfQ==
+eyJoaXN0b3J5IjpbNjI0MzQ3MDQ3LC0xODQwMDQ4NDc2LDcxMz
+MyNDkxOCwxOTY3NTg2OTU5LDkwNjYyNDE2OV19
 -->
