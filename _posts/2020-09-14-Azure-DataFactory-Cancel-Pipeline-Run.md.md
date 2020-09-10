@@ -23,9 +23,11 @@ Inside the true branch of the *If Condition* add *Web* activity (under general)
 Since there's no activity then we need to call the ADF REST API which is part of the Azure Resource Manager (https://management.azure.com) .
 The API we are interested in is the [Cancel Pipeline Run API](https://docs.microsoft.com/en-us/rest/api/datafactory/pipelineruns/cancel) 
 
-
+The API format 
+POST https://management.azure.com/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/pipelineruns/{runId}/cancel?api-version=2018-06-01
+Luckily the {factoryName} and the {runId} can be obtained using ADF functions during runtime (with a catch) 
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE4NDAwNDg0NzYsNzEzMzI0OTE4LDE5Nj
-c1ODY5NTksOTA2NjI0MTY5XX0=
+eyJoaXN0b3J5IjpbLTE5MDYyNTcyODcsLTE4NDAwNDg0NzYsNz
+EzMzI0OTE4LDE5Njc1ODY5NTksOTA2NjI0MTY5XX0=
 -->
