@@ -6,7 +6,7 @@ logo:
 favicon: 'assets/images/favicon.ico'
 baseurl: 
 production_url: https://cloudsafari.ca/
-disqus: 'justgoodthemes'
+disqus: 
 mailchimp_url: 
 cover_image: bc_1.jpg
 # Add your GA Tracking Id
