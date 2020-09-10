@@ -46,11 +46,13 @@ If you run the pipeline this way, probably you will get access denied error beca
 
 > Note:
 > > The Managed Identity name is the same name as the data factory
-> > There's optional parameter to this API to cancel recursively so if the pipeline calls another pipeline, the called pipeline will be cancelled as well 
+> > There's optional parameter to this API to cancel recursively so if the pipeline calls another pipeline, the called pipeline will be cancelled as well
+
+ 
 
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE1MDc2NjgwODksMTg4NDMxMDgzLC0xOD
-QwMDQ4NDc2LDcxMzMyNDkxOCwxOTY3NTg2OTU5LDkwNjYyNDE2
-OV19
+eyJoaXN0b3J5IjpbMTIwMDc5MDY5OSwxODg0MzEwODMsLTE4ND
+AwNDg0NzYsNzEzMzI0OTE4LDE5Njc1ODY5NTksOTA2NjI0MTY5
+XX0=
 -->
