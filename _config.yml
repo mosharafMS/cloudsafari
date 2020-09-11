@@ -10,7 +10,8 @@ disqus:
 mailchimp_url: 
 cover_image: bc_1.jpg
 # Add your GA Tracking Id
-ga_analytics: 
+ga_analytics: "UA-177612139-1"
+
 
 
 # Author
