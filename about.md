@@ -1,7 +1,7 @@
 ---
 layout: page
 title: About
-featured_image: 
+featured_image: /assets/images/pages/about.jpg
 permalink: /about/
 ---
 
