@@ -48,7 +48,9 @@ If you run the pipeline this way, probably you will get access denied error beca
 > > The Managed Identity name is the same name as the data factory
 > > There's optional parameter to this API to cancel recursively so if the pipeline calls another pipeline, the called pipeline will be cancelled as well
 
- 
+The json for the web activity is added in this code snippet. 
+
+{% gist 5bc65274365efc0bc861dae5849d72ce %}
 
 
 <!--stackedit_data:
