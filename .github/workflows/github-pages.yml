@@ -1,14 +1,23 @@
 name: Build and Deploy GH Pages
-on:
-  push:
-    branches:
-      - master
+on: 
+  workflow_dispatch:
+    inputs:
+      logLevel:
+        description: 'Log level'     
+        required: true
+        default: 'warning'
+      tags:
+        description: 'Test scenario tags'  
 jobs:
   jekyll:
     runs-on: ubuntu-16.04
 
     steps:
-      - uses: actions/checkout@v2
+      - name: logging loglevl
+          - run:echo "Log level:${{ github.event.inputs.logLevel }}"
+      - name: logging tags
+          - run:echo "Tags:${{ github.event.inputs.tags }}" 
+      - uses: a ctions/checkout@v2
       # Use GitHub Actions' cache to shorten build times and decrease load on servers.
       - uses: actions/cache@v1
         with:
