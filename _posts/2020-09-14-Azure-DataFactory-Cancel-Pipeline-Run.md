@@ -4,7 +4,7 @@ title:  "Cancel Data Factory Pipeline Run "
 tags:  [ Data-Factory, Pipeline-Run ]  
 featured_image_thumbnail: assets/images/posts/2020/ADF-thumbnail.jpg 
 
-date: 2020-09-14
+date: 2020-09-13
 category: Data-Engineering
 
 ---
