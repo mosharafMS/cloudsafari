@@ -7,7 +7,6 @@ date: 2020-10-26
 category: Data-Platform
 ---
 
-# Call Databricks API from Logic Apps
 
 Recently I needed to help a customer to call Databricks API and since there are many ways to do this I must start by scoping the scenario 
 
