@@ -87,13 +87,13 @@ All the Databricks URLs are using the instance name which is what comes before *
 
 The complete code of the app at the end of this article. I'll go through the main steps with some description 
 
-![logic app trigger](C:\Users\mosharaf\source\repos\cloudsafari.ca\assets\images\posts\2020\logic-app-trigger.png)
+![logic app trigger](/assets/images/posts/2020/logic-app-trigger.png)
 
 The logic app is triggered by an http trigger. This way I can call it from another logic app that fetch the secrets from key vault. So I can reuse and share this one without worrying about secret management
 
 
 
-![Access token for databricks login app](C:\Users\mosharaf\source\repos\cloudsafari.ca\assets\images\posts\2020\logic-app-access-token-dbricks.png)
+![Access token for databricks login app](/assets/images/posts/2020/logic-app-access-token-dbricks.png)
 
 This is the first access token. we get Azure AD access token for **the Databricks login app** that will be used to access the Databricks instance
 
@@ -103,7 +103,7 @@ Next is to issue almost identical REST API call to authenticate with only one di
 
 
 
-![list clusters API](C:\Users\mosharaf\source\repos\cloudsafari.ca\assets\images\posts\2020\logic-app-list-clusters.png)
+![list clusters API](/assets/images/posts/2020/logic-app-list-clusters.png)
 
 
 
