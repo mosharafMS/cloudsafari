@@ -1,11 +1,11 @@
 ---
 layout: post  
 title:  "Data Analytics Basics - Critical Review"  
-tags:  [ Data Lake, Data Warehouse, Data Hub ]  
+tags:  [ Data-Lake, Data-Warehouse, Data-Hub ]  
 featured_image_thumbnail: /assets/images/posts/2021/analytics-thumbnail.jpg
 
 date: 2021-02-13
-category: Data-Engineering
+category: Data-platform
 
 ---
 
