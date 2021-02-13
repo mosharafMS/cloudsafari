@@ -51,7 +51,7 @@ plugins_dir:
   - jekyll-tagsgenerator
   - jekyll-seo-tag
   - jekyll-sitemap
-  - YouTube
+  - _plaugins/YouTube
 
 # Pagination
 paginate: 5
