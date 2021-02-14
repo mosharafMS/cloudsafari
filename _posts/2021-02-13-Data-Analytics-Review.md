@@ -28,7 +28,7 @@ The talk -as implied by the title- is trying to discuss the basics but away from
 - Data Hub is a *logical architecture* which enables data sharing. I see this ignored/avoided at many customers discussions mainly because the data team is mainly consists of data engineers & data scientists and neither of them -typically- have experience in Enterprise integration APIs/service bus. In my opinion that shouldn't hinder the architect from considering this as a logical component that can be physically satisfied by many implementations. A csv file on a blob/file container can be your data hub. I see SFTP in many cases upgraded to be a data hub. All these are accepted to some extend as long as in the original blueprint data hub was a basic component and didn't just put there without holistic understanding of its function. 
 - Relational Data Warehouses are not dead and according to Gartner many organizations are planning to use it. I see dependency on **only data lake** is un-natural and will cause the failure of the data analytics project when trying to force it on the data team. 
 
-These are the main messages and I hope I could convey them to you to the best of my knowledge. [The slide deck are here](/assts/docs/Data Analytics Architecture.pdf) 
+These are the main messages and I hope I could convey them to you to the best of my knowledge. [The slide deck are here](/assets/docs/Data Analytics Architecture.pdf) 
 
 I'm also adding the recorded session (the recording was not live) here
 
