@@ -76,7 +76,7 @@ jekyll-spaceship:
       id: 'media-{id}'
       class: 'media'
       width: '100%'
-      height: 350
+      height: 50
       frameborder: 0
       style: 'max-width: 600px; outline: none;'
       allow: 'encrypted-media; picture-in-picture'
