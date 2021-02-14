@@ -32,7 +32,7 @@ These are the main messages and I hope I could convey them to you to the best of
 
 I'm also adding the recorded session (the recording was not live) here
 
-![]({https://www.youtube.com/watch?v=XfTJwdPGjko?width=800&height=500})
+![]({https://www.youtube.com/watch?v=XfTJwdPGjko})
 
 
 
