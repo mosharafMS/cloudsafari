@@ -122,7 +122,7 @@ I'm still waiting final confirmation from the Azure monitor team but all the inv
  There's a trick in the AzureMonitor service tag, as per the [docs](https://docs.microsoft.com/en-us/azure/virtual-network/service-tags-overview) **AzureMonitor** service tag has a dependency on the **Storage** tag which means to be on the safe side you need to add the storage service tag in your Azure Firewall Network rules but that's too much to allow all the traffic to all the storage accounts in a region. In my customer's deployments, we depended on reading the logs with denied access and add these storage accounts one by one. This way is of course more restrictive and may fail after while when these storage accounts change but it's better for security.
 
 I didn't record a new video for the new setup but the one done on December 2019 still valid as a guide with this article.
-![]({http://www.youtube.com/watch?v=U7Iw6g1_Rfg?width=800&height=500})
+![]({http://www.youtube.com/watch?v=U7Iw6g1_Rfg})
 
 
 ### References
