@@ -3,10 +3,9 @@ layout: post
 title:  "Data Analytics Basics - Critical Review"  
 tags:  [ Data-Lake, Data-Warehouse, Data-Hub ]  
 featured_image_thumbnail: /assets/images/posts/2021/analytics-thumbnail.jpg
-
+featured: true 
 date: 2021-02-13
 category: Data-platform
-
 ---
 
 # Data Analytics Basics - critical review 
@@ -16,7 +15,7 @@ I had the pleasure recently to deliver a session at the [Worldwide Software Arch
  In this post, I will try to summarize the talk in few paragraphs. 
 
 The talk -as implied by the title- is trying to discuss the basics but away from the restraints of what's hot these days. I also wanted to be vendor-neutral as the conference track's objective to discuss the architecture away from the vendor specifics. These are the main points 
-
+<!--more-->
 - When a customer lists the data sources that they are interested in including in their data warehouse, they typically ignore two types of data 
   - Dark Data: That's the data collected from websites logs, telemetry and not analyzed for long term
   - External (contextual) Data: That's the data that might be collected *about* the business not by the business itself. Examples: social media mentions to the company or the products, analysts/news agencies publishing about the company or the products 
