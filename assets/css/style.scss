@@ -451,9 +451,9 @@
 }
 
 .hero-avatar .avatar {
-  border: 4px solid $color-accent;
+  border: 5px solid #2f313d;
   border-radius: 100%;
-  box-shadow: 0 0 1px 11px rgba($color-accent,.15), 0 0 1px 22px rgba($color-accent,.1);
+  box-shadow: 0 0 1px 11px #b8b8bb, 0 0 1px 22px rgb(231, 231, 231);
   display: inline-block;
   height: 130px;
   width: 130px;
