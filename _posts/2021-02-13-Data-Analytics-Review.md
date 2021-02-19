@@ -8,8 +8,6 @@ date: 2021-02-13
 category: Data-platform
 ---
 
-# Data Analytics Basics - critical review 
-
 I had the pleasure recently to deliver a session at the [Worldwide Software Architecture Summit](https://architecture.geekle.us/). I see a rise of more virtual-only events phenomenon even beyond Covid as many now realized that the value/cost balance for these events is very positive. 
 
  In this post, I will try to summarize the talk in few paragraphs. 
