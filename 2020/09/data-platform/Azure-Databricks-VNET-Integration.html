@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    
+        <!-- Begin Jekyll SEO tag v2.6.1 -->
+<title>Azure Databricks Deep Dive-Networking | CloudSafari</title>
+<meta name="generator" content="Jekyll v3.6.3">
+<meta property="og:title" content="Azure Databricks Deep Dive-Networking">
+<meta name="author" content="Mohamed Sharaf">
+<meta property="og:locale" content="en_US">
+<meta name="description" content="This is an updated version of my article at Medium.com originally written on December 2019 as some changes happened since then">
+<meta property="og:description" content="This is an updated version of my article at Medium.com originally written on December 2019 as some changes happened since then">
+<meta property="og:site_name" content="CloudSafari">
+<meta property="og:type" content="article">
+<meta property="article:published_time" content="2020-09-09T00:00:00+00:00">
+<meta name="twitter:card" content="summary">
+<meta property="twitter:title" content="Azure Databricks Deep Dive-Networking">
+<meta name="twitter:site" content="@">
+<meta name="twitter:creator" content="@Mohamed Sharaf">
+<script type="application/ld+json">
+{"description":"This is an updated version of my article at Medium.com originally written on December 2019 as some changes happened since then","url":"/2020/09/data-platform/Azure-Databricks-VNET-Integration","headline":"Azure Databricks Deep Dive-Networking","dateModified":"2020-09-09T00:00:00+00:00","datePublished":"2020-09-09T00:00:00+00:00","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"/2020/09/data-platform/Azure-Databricks-VNET-Integration"},"author":{"@type":"Person","name":"Mohamed Sharaf"},"@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+
+    
+
+    <!-- Site Favicon -->
+    <link rel="shortcut icon" href="/assets/images/favicon.ico" type="image/png">
+
+    <!-- Font Embed Code -->
+    <link href="https://fonts.googleapis.com/css?family=Karla:400,400i,700,700i" rel="stylesheet">
+
+    <!-- CSS Styles -->
+    <link href="/assets/css/style.css" rel="stylesheet">
+
+</head>
+
+
+
+<body class="layout-post">
+    <div id="page" class="site">
+
+        
+        <header id="masthead" class="site-header outer">
+    <div class="site-header-inside">
+        <div class="site-branding">
+            
+                <h1 class="site-title"><a href="/" rel="home">CloudSafari</a></h1>
+            
+        </div>
+<!-- .site-branding -->
+        <nav id="main-navigation" class="site-navigation" aria-label="Primary Navigation">
+            <ul class="menu">
+            
+                <li class="menu-item"><a href="/about/">About</a></li>
+            
+            </ul>
+            <button id="sidebar-show" class="sidebar-toggle"><span class="screen-reader-text">Open Sidebar</span><span class="icon-more" aria-hidden="true"></span></button>
+        </nav><!-- .site-navigation -->
+    </div>
+<!-- .site-header-inside -->
+</header><!-- .site-header -->
+        
+
+        <div id="content" class="site-content fadeInDown delay_075s">
+    <main id="main" class="site-main outer">
+        <article class="post-full inner">
+            <header class="post-header">
+                <div class="post-meta">
+                    <time class="post-date" datetime="2020-09-09">September 9,
+                        2020</time>
+                </div>
+<!-- .post-meta -->
+                <h1 class="posttitle">Azure Databricks Deep Dive-Networking</h1>
+            </header><!-- .post-header -->
+            
+            <div class="post-content">
+                <p>This is an updated version of my article at <a href="https://medium.com/cloudsafari-ca/azure-databricks-deployments-issues-3195ea8c7f56">Medium.com</a> originally written on December 2019 as some changes happened since then</p>
+
+<p>Azure Databricks  <a href="https://docs.microsoft.com/en-us/azure/databricks/workspace/">workspace</a> is a code authoring and collaboration workspace that can have one or more Apache Spark clusters. So as a prerequisites to create the cluster, there has to be a  <a href="https://docs.microsoft.com/en-us/azure/virtual-network/virtual-networks-overview">Virtual Network (VNET)</a>  to have the machines attached to itd. That’s why in the managed resource group, if you don’t choose to use your own VNET, there will be a VNET created for you.</p>
+
+<p>Many organizations have restrictions about the VNET creation and prefer to integrate the Databricks clusters into their network infrastructure, that’s why Azure Databricks now supports VNET injection. VNET injection enable you to use an existing VNET for hosting the Databricks clusters.</p>
+
+<p>The  <a href="https://docs.microsoft.com/en-us/azure/databricks/administration-guide/cloud-configurations/azure/vnet-inject">docs</a>  are listing the benefits &amp; the requirements of these VNETs so I won’t list all of them here however the most important ones</p>
+
+<ul>
+  <li>Have to be in the same subscription</li>
+  <li>
+<strong>Address space:</strong>  A CIDR block between /16 — /24 for the virtual network and a CIDR block up to /26 for the private and public subnets</li>
+  <li>Two subnet per workspace</li>
+  <li>Can’t use the same subnet by two workspaces –&gt; That means every time there’s a new workspace, there’s quite a checklist to go through which makes the idea of hosting multiple projects/departments on the same workspace a favorable idea but that’s the topic of another article.</li>
+  <li>
+    <hr>
+    <p><strong>But first, what’s deployed inside the customer’s VNET? is Azure Databricks entirely deployed there?</strong>
+No, the control plane and web UI are always deployed in a Microsoft-managed subscription. That’s why the Azure Databrisk UI is always https://&lt; Azure Region &gt;.azuredatabricks.net</p>
+  </li>
+</ul>
+
+<p><img src="/assets/images/posts/2020/dbricks-vnet-architecture.png" alt="Azure Databricks Network Architecture"></p>
+
+<p>During workspace deployment, there’s no clusters created yet. So during deployment, Databricks would insure that the minimum requirements for the clusters to be successfully deployed are met.</p>
+
+<p><strong>What happens during deployment time?</strong></p>
+
+<p><img src="/assets/images/posts/2020/dbricks-creation-flowchart-network.png" alt="Azure Databricks Creation Flowchart"></p>
+
+<ul>
+  <li>Delegation to Microsoft.Databricks/workspaces is made on each subnet. This delegation will be used by the service to create a Network Intent Policy. Azure Network Intent Policy is a feature used by some Microsoft first party providers like SQL Managed Instance. It’s not available for customers’ use as there’s no public docs for it. In the case of Databricks, it’s used to maintain the NSG rules added by the workspace creation. If you try to delete one of the rules, you will get an error message because of the Intent Policy.</li>
+  <li>Check if there’s already an NSG attached to the subnet. If not then the creation of the workspace will fail. In the portal experience, the ARM template generated by the portal is avoiding the failure by creating an NSG and attach it. It will create only one NSG for both private &amp; public subnets. The rules are identical anyways even if you provided two NSGs, you will find the same set of rules.</li>
+  <li>If there’s NSG attached, new rules will be added and protected by the Intent Policy so it can’t be changed or deleted.</li>
+</ul>
+
+<p>I’ve created  <a href="https://github.com/mosharafMS/ARM-Templates/tree/master/Databricks/vnetInjection">a sample ARM template on github</a>  that deploys Databricks workspace with VNET integration but you have to setup the delegation and attache NSGs to the subnet before you deploy the template</p>
+
+<hr>
+
+<p><strong>Why having two subnets?</strong>
+Each machine in the Databricks cluster has two virtual network cards (NIC), one with private IP only attached to the private subnet and one with both private &amp; public IPs attached to public subnets. The public IPs used to communicate between your cluster and the control plane of Azure Databricks plus any other data sources that might reside outside your Vnet. All the inter-cluster communication happens on the
+ <strong>Are the subnets exclusively used by the workspace clusters only?</strong>
+No, you can use subnets that has NICs already attached to them. But you can’t have two different workspaces on the same subnet</p>
+
+<h2 id="integrating-azure-databricks-workspaces-with-firewalls">Integrating Azure Databricks workspaces with firewalls</h2>
+<p>On of the main reasons to have Azure Databricks workspaces integrated with VNET is to utilize your existing firewalls. The workflow to do that is</p>
+
+<ol>
+  <li>Create and assign Route Tables that  will  force the traffic from
+Azure Databricks to be filtered by the firewall first.</li>
+  <li>In the firewall you add rules to allow the traffic needed for your workspace</li>
+</ol>
+
+<blockquote>
+  <p>The traffic coming to the public IPs of the workspace clusters,
+doesn’t pass on the firwall and if your routing route all 0.0.0.0/0 to
+the firewall that means the firewall will only see the return of the
+traffic and for any stateful firewall like Azure Firewall, it will
+drop the traffic. You have to add exception of the routing for the
+control plane. The screenshot below shows this problem. For a complete
+list of the IPs per region, refer to the <a href="https://docs.microsoft.com/en-us/azure/databricks/administration-guide/cloud-configurations/azure/udr">docs</a></p>
+</blockquote>
+
+<p><img src="/assets/images/posts/2020/assymetric-network.png" alt="Asymmetric traffic"></p>
+
+<p>Because of how stateful firewalls work , the routing table should avoid routing <em>ALL</em> the traffic but to exclude the traffic going to the control plane and the web app of Databricks. Per each Azure region that has Databricks enabled in, there are two IP ranges, one for the control plane and one for the webapp. These are unique to the region and should be excluded from the routing. The screenshot below shows the routing for a databricks in Canada Central region.</p>
+
+<p><img src="/assets/images/posts/2020/routing-table.png" alt="Sample Routing Table"></p>
+
+<p>In my testing, I used <a href="https://docs.microsoft.com/en-us/azure/firewall/overview">Azure Firewall</a> and I’ll list all the Network Rules and Application Rules I added to have a successful cluster creation and running sample notebook.</p>
+
+<h2 id="documented-rules">Documented Rules</h2>
+<h3 id="dbfs-root-blob-storage-ip-address">DBFS root Blob storage IP address</h3>
+<p>Each workspace has a storage account created and managed by Databricks to act as the local file system of the clusters of this workspace. Also is used to save the notebooks. There’s a storage account per workspace in the managed resource group of the workspace. The naming convention of it is dbstorage &lt; random alphanumeric string&gt; 
+Until now, Databricks doesn’t use private endpoint for these storage accounts (something for the near future may be) so the traffic destined to this storage account has to pass through the firewall and you need to use Application Rule (by using the FQDN) to allow it. 
+I highly recommended not using something like <code class="highlighter-rouge">*.blob.core.windows.net</code> because that allows the Databricks cluster to reach any storage account on Azure anywhere in the globe which will open the door for exfilteration attacks.</p>
+
+<h3 id="metastore-artifact-blob-storage-log-blob-storage-and-event-hub-endpoint-ip-addresses">Metastore, artifact Blob storage, log Blob storage, and Event Hub endpoint IP addresses</h3>
+<p><strong>Metastore</strong> is a mysql database where the metadata about the workspace is saved
+. Which means if you are using IP &amp; port combination then you need to get the IP of the URL from the docs and use port 3306. For example for Canada Central</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>nslookup consolidated-canadacentral-prod-metastore.mysql.database.azure.com
+
+Name:    cr2.canadacentral1-a.control.database.windows.net
+Address:  52.228.35.221
+Aliases:  consolidated-canadacentral-prod-metastore.mysql.database.azure.com In Azure Firewall, we can use the FQDN in the network rules so there's no need to get the IP but if your firewall doesn't support that then get the IP and periodically update it.    **Artifact Blob storage** both primary &amp; secondary storage accounts (which can be the same account in some regions) are the storage account where the scripts and the binary files of Databricks are saved at. 
+</code></pre></div></div>
+
+<p><strong>Log Blob storage</strong> is another storage used for cluster logs</p>
+
+<p><strong>Event Hub endpoint</strong> eventhub endpoint used for shipping logs as well. This is eventhub kafka so it uses port 9093. For more details, refer to the <a href="https://docs.microsoft.com/en-us/azure/event-hubs/event-hubs-faq#what-ports-do-i-need-to-open-on-the-firewall">docs</a></p>
+
+<h2 id="special-un-documented-domains">Special un-documented domains</h2>
+<p>During my testing with Azure Firewall &amp; Databricks, I found that the docs didn’t cover all the FQDNs that are requested by my cluster. From my testing I found out these extra ones. I added what I collected about them from different sources and my decision</p>
+<ul>
+  <li>
+<strong>Ubuntu updates</strong> Used for Ubuntu updates since Databricks is built on Ubuntu image ==&gt; enabled  *.ubuntu.com</li>
+  <li>
+<strong>snap packages</strong> Package management for Ubuntu ==&gt; enabled  *.snapcraft.io</li>
+  <li>terracotta → *.terracotta.org</li>
+  <li>cloudflare → *.cloudflare.com</li>
+  <li>ICMP Type 8 (Ping) to 172.217.13.164 which is an IP belongs to Google. I didn’t see any docs for it but since it’s just ping, I didn’t see an issue with that traffic. It can be a heartbeat to check if the server has connectivity with the internet. It can be due to exceptions raised by blocked URLs so the servers check connectivity.</li>
+  <li>When accessing the quickstart notebook and read the sample data using this code
+    <div class="language-sql highlighter-rouge">
+<div class="highlight"><pre class="highlight"><code><span class="k">DROP</span> <span class="k">TABLE</span> <span class="n">IF</span> <span class="k">EXISTS</span> <span class="n">diamonds</span><span class="p">;</span>
+<span class="k">CREATE</span> <span class="k">TABLE</span> <span class="n">diamonds</span>
+<span class="k">USING</span> <span class="n">csv</span>
+<span class="k">OPTIONS</span> <span class="p">(</span><span class="n">path</span> <span class="nv">"/databricks-datasets/Rdatasets/data-001/csv/ggplot2/diamonds.csv"</span><span class="p">,</span> <span class="n">header</span> <span class="nv">"true"</span><span class="p">)</span>
+</code></pre></div>    </div>
+  </li>
+</ul>
+
+<p>It will throw error and in the firewall logs, you will find deny access to <em>sts.amazonaws.com</em> which means that the sample data still in S3 buckets. I didn’t allow this URL in this testing round but if you did, expect to have another URL or two to show up. These are the exact buckets that hosts the sample dataset. They will be * &lt; bucket name&gt;.s3.amazonaws.com*</p>
+
+<ul>
+  <li>
+<strong>nvidia.github.io</strong> used to pull nvidia drivers. In my testing, I didn’t see any clusters that has GPUs but still the traffic to nvidia github pages was recorded so it seems it’s needed for all clusters not just GPU-equipped clusters.</li>
+  <li>
+<strong>deb.nodesource.com</strong> this is a shortcut to <a href="https://github.com/nodesource/distributions">https://github.com/nodesource/distributions</a> which has node distribution packages</li>
+  <li>
+<strong>files.pythonhosted.org</strong>  This site hosts packages and documentation uploaded by authors of packages on the <a href="http://pypi.python.org/">Python Package Index</a>.</li>
+  <li>
+<strong>UDP protocol on port 123</strong>  for Network Time Protocol ==&gt; created a network rule for UDP protocol with destination port 123</li>
+  <li>
+<strong>pypi.org</strong> for python pypi packages</li>
+  <li>
+<strong>Azure Monitor</strong> In the testing we found two storage account not related to Databricks 
+<em>zrdfepirv2yto21prdstr02a.blob.core.windows.net</em>
+<em>zrdfepirv2yt1prdstr06a.blob.core.windows.net</em>	
+I’m still waiting final confirmation from the Azure monitor team but all the investigations leading to these are used by the Azure Monitor linux agent.
+<strong>Buy why we have a deny on Azure Monitor storage accounts when we enable the AzureMonitor service tag?</strong>
+ There’s a trick in the AzureMonitor service tag, as per the <a href="https://docs.microsoft.com/en-us/azure/virtual-network/service-tags-overview">docs</a> <strong>AzureMonitor</strong> service tag has a dependency on the <strong>Storage</strong> tag which means to be on the safe side you need to add the storage service tag in your Azure Firewall Network rules but that’s too much to allow all the traffic to all the storage accounts in a region. In my customer’s deployments, we depended on reading the logs with denied access and add these storage accounts one by one. This way is of course more restrictive and may fail after while when these storage accounts change but it’s better for security.</li>
+</ul>
+
+<p>I didn’t record a new video for the new setup but the one done on December 2019 still valid as a guide with this article.
+<iframe id="media-U7Iw6g1_Rfg" class="media" src="https://www.youtube.com/embed/U7Iw6g1_Rfg?v=U7Iw6g1_Rfg%7D" title="" width="100%" height="50" style="max-width: 600px; outline: none;" allow="encrypted-media; picture-in-picture" frameborder="0"></iframe></p>
+
+<h3 id="references">References</h3>
+<p>I’ve added the NetworkRules &amp; ApplicationRules of Azure Firewall in these gists
+<strong>Network Rules</strong></p>
+
+<noscript><pre>400: Invalid request</pre></noscript>
+<script src="https://gist.github.com/1ae634e2df771b7eec453ce2a35ba727.js"> </script>
+
+<p><strong>Application Rules</strong></p>
+
+<noscript><pre>400: Invalid request</pre></noscript>
+<script src="https://gist.github.com/158f9dada9cb10657f8f0dd838138df4.js"> </script>
+
+<!--stackedit_data:
+eyJoaXN0b3J5IjpbLTE3MDQ0ODUzMjUsMzAyNzkxMTYyLDExNz
+Y0NjU4NjksLTE1MDAxOTg5NDksODUwMDE4NTc2LC03ODgyMDg5
+MDAsLTI3MjE1OTE1NywtMjY0MzMwODIzLDE1MzYyMzAyMzksLT
+c4ODgzOTM0LDEyMDMzMDM0MTIsLTE0NjY0ODE2NzcsMjAwMTQ1
+ODQxNCwxMDIxNTE1OTY2LDUxMTU1NTAzLDQ5NjEwOTc5MSwtMT
+AzOTE4NTE4Myw2NTI3NDAyNzQsLTEzNjkxNzkzOTcsMTYzNTQw
+ODE4NV19
+-->
+
+            </div>
+            <footer class="post-footer">
+                
+                <p class="post-tags">
+                     
+                    <a href="tag/azure-databricks/">Azure-Databricks</a>
+                    
+                     
+                    <a href="tag/azure-firewall/">Azure-Firewall</a>
+                    
+                     
+                    <a href="tag/vnet/">VNET</a>
+                    
+                    
+                </p>
+                
+                <div class="post-share">
+                    <span class="post-share-title">Share:</span>
+                    <a target="_blank" href="https://twitter.com/share?text=Azure+Databricks+Deep+Dive-Networking&amp;url=https://cloudsafari.ca/2020/09/data-platform/Azure-Databricks-VNET-Integration">Twitter</a>
+                    <a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://cloudsafari.ca/2020/09/data-platform/Azure-Databricks-VNET-Integration">Facebook</a>
+                </div>
+<!-- .share-post -->
+            </footer>
+            <div class="author-box">
+                <div class="author-avatar"><img src="/assets/images/authorimage.jpg" alt="Mohamed Sharaf's Picture" class="avatar"></div>
+                <div class="author-details">
+                    <h2 class="author-title">About Mohamed Sharaf</h2>
+                    <p class="author-description">Mohamed Sharaf, Cloud Solution Architect at Microsoft and curious to learn something new. Love intelligent debate and knowing intelligent people. Amateur cyclist though I do not think I will write about my hobby here. This blog is my personal way to provide high quality material to help a fellow learner understand something, anything. I will not write until there is something worth writing and I will try to update it and engage with comments regularly.</p>
+                </div>
+            </div>
+            
+<section id="comments-area" class="comments-area">
+    <h2 class="comments-title">Comments</h2>
+    <div class="comments-inside">
+        <div id="disqus_thread"></div>
+    </div>
+<!-- .comments-inside -->
+    <div id="comments-overlay" class="comments-overlay">
+        <a href="#" id="comments-show" class="comments-show">Show comments</a>
+    </div>
+<!-- .comments-overlay -->
+    <script type="text/javascript">
+        var disqus_shortname = 'cloudsafari-ca';
+        var disqus_developer = 0;
+        (function () {
+            var dsq = document.createElement('script');
+            dsq.type = 'text/javascript';
+            dsq.async = true;
+            dsq.src = window.location.protocol + '//' + disqus_shortname + '.disqus.com/embed.js';
+            dsq.setAttribute('data-timestamp', +new Date());
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by
+            Disqus.</a>
+</noscript>
+    <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+</section>
+
+
+        </article>
+        
+        <section class="read-next inner">
+            <h2 class="read-next-title">Read Next</h2>
+            
+            
+            <article class="post">
+                <header class="post-header">
+                    <div class="post-meta">
+                        <time class="published" datetime="September 13, 2020">September 13, 2020</time>
+                    </div>
+                    <h3 class="post-title"><a href="/2020/09/data-engineering/Azure-DataFactory-Cancel-Pipeline-Run">Cancel Data Factory Pipeline Run </a></h3>
+                    <p class="post-tags">
+                        
+                        
+                        
+                        <a href="/tag/data-factory/">Data-factory</a>
+                        
+                        
+                        
+                        <a href="/tag/pipeline-run/">Pipeline-run</a>
+                        
+                        
+                        
+                    </p>
+                </header>
+                
+                <a href="/2020/09/data-engineering/Azure-DataFactory-Cancel-Pipeline-Run" class="post-thumbnail">
+                    <img src="/assets/images/posts/2020/ADF-thumbnail.jpg" alt="Cancel Data Factory Pipeline Run ">
+                </a>
+                
+            </article>
+            
+        </section><!-- .read-next -->
+    </main><!-- .site-main -->
+</div>
+<!-- .site-content -->
+
+        
+
+        
+
+        <footer id="colophon" class="site-footer outer">
+            <div class="site-footer-inside">
+                <p class="social-links">
+    
+    <a href="https://twitter.com/@mohamsharaf" target="_blank">
+        <span class="fa-twitter fa" aria-hidden="true"></span>
+        <span class="screen-reader-text">Twitter</span>
+    </a>
+    
+    
+    
+    <a href="https://github.com/mosharafMS" target="_blank">
+        <span class="fa-github fa" aria-hidden="true"></span>
+        <span class="screen-reader-text">GitHub</span>
+    </a>
+    
+    
+    
+    
+    <a href="https://medium.com/@mohamed.sharaf" target="_blank">
+        <span class="fa-medium fa" aria-hidden="true"></span>
+        <span class="screen-reader-text">medium</span>
+    </a>
+    
+    
+    
+    
+    <a href="https://www.linkedin.com/in/mosharafms" target="_blank">
+        <span class="fa-linkedin fa" aria-hidden="true"></span>
+        <span class="screen-reader-text">Linkedin</span>
+    </a>
+    
+    
+</p>
+                <p class="site-info">
+                    <a href="#">CloudSafari</a> © 2021 . <br>
+                    Powered by <a target="_blank" href="https://jekyllrb.com/">Jekyll</a>.
+                </p>
+                <p class="back-to-top">
+                    <a id="top-button" class="top-button" href="#page">
+                        <span class="icon-arrow-up" aria-hidden="true"></span>
+                        <span class="screen-reader-text">Back to top</span>
+                    </a>
+                </p>
+            </div>
+<!-- .site-footer-inside -->
+        </footer><!-- .site-footer -->
+    </div>
+<!-- .site -->
+    <div id="site-overlay" class="site-overlay"></div>
+    <aside id="sidebar" class="sidebar">
+	<div class="sidebar-scrollable">
+		<div class="sidebar-inside">
+			<button id="sidebar-hide" class="sidebar-toggle"><span class="screen-reader-text">Close Sidebar</span><span aria-hidden="true" class="icon-close"></span></button>
+			<nav id="sidebar-navigation" class="widget site-navigation">
+				<h2 class="widget-title">Explore Site</h2>
+				<ul class="menu">
+					
+						<li class="menu-item"><a href="/about/">About</a></li>
+					
+				</ul>
+			</nav>
+			
+<section class="widget widget-text">
+    <h2 class="widget-title">About CloudSafari</h2>
+    <p>CloudSafari is my personal window to share about my work and technical projects. All information are provided as is and my views only represent myself</p>
+</section>
+
+
+<section class="widget widget-recent-posts">
+    <h2 class="widget-title">Recent Articles</h2>
+    <ul>
+        
+        <li>
+            <div class="post-header">
+                <div class="post-meta">
+                    <time class="published" datetime="??">February 13, 2021</time>
+                </div>
+                <div class="post-title">
+                    <a href="/2021/02/data-platform/Data-Analytics-Review">Data Analytics Basics - Critical Review</a>
+                </div>
+            </div>
+            
+            <a class="post-thumbnail" href="/2021/02/data-platform/Data-Analytics-Review">
+                <img src="/assets/images/posts/2021/analytics-thumbnail.jpg" alt="Data Analytics Basics - Critical Review">
+            </a>
+            
+        </li>
+        
+        <li>
+            <div class="post-header">
+                <div class="post-meta">
+                    <time class="published" datetime="??">October 26, 2020</time>
+                </div>
+                <div class="post-title">
+                    <a href="/2020/10/data-platform/Call-Databricks-APIs">Call Databricks API from Logic Apps</a>
+                </div>
+            </div>
+            
+            <a class="post-thumbnail" href="/2020/10/data-platform/Call-Databricks-APIs">
+                <img src="/assets/images/posts/2020/databricks-api-thumbnail.png" alt="Call Databricks API from Logic Apps">
+            </a>
+            
+        </li>
+        
+        <li>
+            <div class="post-header">
+                <div class="post-meta">
+                    <time class="published" datetime="??">September 13, 2020</time>
+                </div>
+                <div class="post-title">
+                    <a href="/2020/09/data-engineering/Azure-DataFactory-Cancel-Pipeline-Run">Cancel Data Factory Pipeline Run </a>
+                </div>
+            </div>
+            
+            <a class="post-thumbnail" href="/2020/09/data-engineering/Azure-DataFactory-Cancel-Pipeline-Run">
+                <img src="/assets/images/posts/2020/ADF-thumbnail.jpg" alt="Cancel Data Factory Pipeline Run ">
+            </a>
+            
+        </li>
+        
+    </ul>
+</section>
+
+<!-- Create a sorted array of tags -->
+ 
+<section class="widget widget-tagcloud">
+    <h2 class="widget-title">Tags</h2>
+    <div class="tagcloud">
+        
+        <a href="https://cloudsafari.ca/tag/azure-databricks/">Azure-Databricks</a>
+        
+        <a href="https://cloudsafari.ca/tag/azure-firewall/">Azure-Firewall</a>
+        
+        <a href="https://cloudsafari.ca/tag/data-factory/">Data-Factory</a>
+        
+        <a href="https://cloudsafari.ca/tag/data-hub/">Data-Hub</a>
+        
+        <a href="https://cloudsafari.ca/tag/data-lake/">Data-Lake</a>
+        
+        <a href="https://cloudsafari.ca/tag/data-warehouse/">Data-Warehouse</a>
+        
+        <a href="https://cloudsafari.ca/tag/databricks/">Databricks</a>
+        
+        <a href="https://cloudsafari.ca/tag/pipeline-run/">Pipeline-Run</a>
+        
+        <a href="https://cloudsafari.ca/tag/vnet/">VNET</a>
+        
+    </div>
+</section>
+
+
+		</div>
+<!-- .sidebar-inside -->
+	</div>
+<!-- .sidebar-scrollable -->
+</aside><!-- .sidebar -->
+    
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-177612139-1"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'UA-177612139-1', { 'anonymize_ip': true });
+  </script>
+  <script type="text/javascript">
+    (function(c,l,a,r,i,t,y){
+        c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+        t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+        y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+    })(window, document, "clarity", "script", "5ei8glh2oh");
+</script>
+
+    <!-- Javascript Assets -->
+    <script src="/assets/js/jquery-3.3.1.min.js"></script>
+    <script src="/assets/js/plugins.js"></script>
+    <script src="/assets/js/custom.js"></script>
+
+</body>
+
+</html>

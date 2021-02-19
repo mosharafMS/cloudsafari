@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    
+        <!-- Begin Jekyll SEO tag v2.6.1 -->
+<title>Call Databricks API from Logic Apps | CloudSafari</title>
+<meta name="generator" content="Jekyll v3.6.3">
+<meta property="og:title" content="Call Databricks API from Logic Apps">
+<meta name="author" content="Mohamed Sharaf">
+<meta property="og:locale" content="en_US">
+<meta name="description" content="Recently I needed to help a customer to call Databricks API and since there are many ways to do this I must start by scoping the scenario">
+<meta property="og:description" content="Recently I needed to help a customer to call Databricks API and since there are many ways to do this I must start by scoping the scenario">
+<meta property="og:site_name" content="CloudSafari">
+<meta property="og:type" content="article">
+<meta property="article:published_time" content="2020-10-26T00:00:00+00:00">
+<meta name="twitter:card" content="summary">
+<meta property="twitter:title" content="Call Databricks API from Logic Apps">
+<meta name="twitter:site" content="@">
+<meta name="twitter:creator" content="@Mohamed Sharaf">
+<script type="application/ld+json">
+{"description":"Recently I needed to help a customer to call Databricks API and since there are many ways to do this I must start by scoping the scenario","url":"/2020/10/data-platform/Call-Databricks-APIs","headline":"Call Databricks API from Logic Apps","dateModified":"2020-10-26T00:00:00+00:00","datePublished":"2020-10-26T00:00:00+00:00","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"/2020/10/data-platform/Call-Databricks-APIs"},"author":{"@type":"Person","name":"Mohamed Sharaf"},"@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+
+    
+
+    <!-- Site Favicon -->
+    <link rel="shortcut icon" href="/assets/images/favicon.ico" type="image/png">
+
+    <!-- Font Embed Code -->
+    <link href="https://fonts.googleapis.com/css?family=Karla:400,400i,700,700i" rel="stylesheet">
+
+    <!-- CSS Styles -->
+    <link href="/assets/css/style.css" rel="stylesheet">
+
+</head>
+
+
+
+<body class="layout-post">
+    <div id="page" class="site">
+
+        
+        <header id="masthead" class="site-header outer">
+    <div class="site-header-inside">
+        <div class="site-branding">
+            
+                <h1 class="site-title"><a href="/" rel="home">CloudSafari</a></h1>
+            
+        </div>
+<!-- .site-branding -->
+        <nav id="main-navigation" class="site-navigation" aria-label="Primary Navigation">
+            <ul class="menu">
+            
+                <li class="menu-item"><a href="/about/">About</a></li>
+            
+            </ul>
+            <button id="sidebar-show" class="sidebar-toggle"><span class="screen-reader-text">Open Sidebar</span><span class="icon-more" aria-hidden="true"></span></button>
+        </nav><!-- .site-navigation -->
+    </div>
+<!-- .site-header-inside -->
+</header><!-- .site-header -->
+        
+
+        <div id="content" class="site-content fadeInDown delay_075s">
+    <main id="main" class="site-main outer">
+        <article class="post-full inner">
+            <header class="post-header">
+                <div class="post-meta">
+                    <time class="post-date" datetime="2020-10-26">October 26,
+                        2020</time>
+                </div>
+<!-- .post-meta -->
+                <h1 class="posttitle">Call Databricks API from Logic Apps</h1>
+            </header><!-- .post-header -->
+            
+            <div class="post-content">
+                <p>Recently I needed to help a customer to call Databricks API and since there are many ways to do this I must start by scoping the scenario</p>
+
+<ul>
+  <li>This is Azure Databricks not Databricks on another cloud provider.</li>
+  <li>Authentication can be done by 3 ways
+    <ul>
+      <li>Azure Databricks <a href="https://docs.microsoft.com/en-us/azure/databricks/dev-tools/api/latest/authentication">Personal Access Token</a>
+</li>
+      <li>Using Azure AD access token <a href="https://docs.microsoft.com/en-us/azure/databricks/dev-tools/api/latest/aad/app-aad-token#use-token">for a user</a> so we need to impersonate a user access to access Databricks</li>
+      <li>Using Azure AD access token <a href="https://docs.microsoft.com/en-us/azure/databricks/dev-tools/api/latest/aad/service-prin-aad-token#use-token">for service principal</a>
+</li>
+    </ul>
+  </li>
+  <li>In this scenario we chose using service principal because it will be used by a service <strong>because</strong> I’d like to keep all the identities centralized in Azure AD for easy management.</li>
+  <li>The APIs that we needed are to list running clusters and terminate them. auto-terminate wasn’t an option because of some restrictions related to this implementation.</li>
+</ul>
+
+<h3 id="the-chosen-service-to-run-the-automation">The chosen service to run the automation</h3>
+
+<p>We chose <a href="https://docs.microsoft.com/en-us/azure/logic-apps/logic-apps-overview">Logic Apps</a> for simplicity however all what we are doing is calling REST APIs so whether it’s logic apps, Function app, automation runbook or any other service hosted inside a VM it’s the same concept</p>
+
+<h3 id="the-workflow">The workflow</h3>
+
+<p>The workflow I’m using as illustrated by the diagram below</p>
+
+<p><img src="/assets/images/posts/2020/databricks-api-calls.png" alt="Calling Databricks API workflow"></p>
+
+<ul class="task-list">
+  <li class="task-list-item">
+<input type="checkbox" class="task-list-item-checkbox" disabled>Get Access token for the Databricks login app</li>
+  <li class="task-list-item">
+<input type="checkbox" class="task-list-item-checkbox" disabled>Get Access token for the Azure management endpoint</li>
+  <li class="task-list-item">
+<input type="checkbox" class="task-list-item-checkbox" disabled>Use the two tokens when calling any Databricks API</li>
+</ul>
+
+<p><strong>But why two access tokens?</strong></p>
+
+<p>​          Because Databricks is very well integrated into Azure using the Databricks resource provider, some APIs requires Azure management (think of anything you can change from the Azure portal) and some require login to the Databricks workspace (i.e listing and updating clusters) however the APIs designed in a way to require both tokens for all of them (or at least up to my knowledge). For that we have to do two API calls to the Azure AD login endpoint</p>
+
+<p><strong>What’s he difference between the two API calls?</strong></p>
+
+<p>Both are identical except for the resource to get the access token to. In Azure AD, you must specify why do you need access token. Meaning what resource you want to access by this token so Azure will get you a token <u>*only*</u> for this service. For the Databricks login app, you must use the guid “<strong>2ff814a6-3304-4ab8-85cb-cd0e6f879c1d</strong>” which if you navigate to Azure portal and searched for this id, you will find it associated with enterprise app named AzureDatabricks. This is the app representing Databricks to facilitate login to the workspace</p>
+
+<h3 id="collecting-the-requirements">Collecting the requirements</h3>
+
+<p><strong>App info</strong></p>
+
+<p>To start getting the access tokens, we need the service principal info. Provided that you have app registration already created in Azure AD. The process to provision he service principal is <a href="https://docs.microsoft.com/en-us/azure/databricks/dev-tools/api/latest/aad/service-prin-aad-token#--provision-a-service-principal-in-azure-portal">documented well in the docs</a> so no need to repeat it</p>
+
+<blockquote>
+  <p>In this context we can use Azure AD app &amp; service principal interchangeably. However they are not both the same. App is one instance that can be shared across multiple directories (Databricks login app is example ) and the service principal is the representation of this app inside the directory. When we authorize, we authorize the service principal not the app.</p>
+</blockquote>
+
+<p><img src="/assets/images/posts/2020/AAD-App-info.png" alt="App Info page in Azure AD"></p>
+
+<p>From the App info page, collect</p>
+
+<ul>
+  <li>Client ID</li>
+  <li>Tenant ID</li>
+  <li>Then navigate to the <em>Certificates &amp; Secrets</em> page from the left navigation bar and generate a secret.</li>
+</ul>
+
+<p>Consider all these information as secrets and you should keep them safely in a keyvault or a similar secret management solution. The logic app I’m including with this article expect all these as input so it doesn’t save or retrieve secrets. I made it this way to be re-usable. More to this later</p>
+
+<p><strong>Azure Resource info</strong></p>
+
+<p>Databricks workspace is an Azure resource, you need to collect</p>
+
+<ul>
+  <li>subscription id</li>
+  <li>resource group name</li>
+  <li>workspace name</li>
+</ul>
+
+<p>We will use them later inside the log app to generate the resource id</p>
+
+<p><strong>Databricks instance</strong></p>
+
+<p>All the Databricks URLs are using the instance name which is what comes before <em>azuredatabricks.net</em> in the URL when you login to the Databricks UI. It’s auto generated and usually starts with <em>adb-</em> then numbers</p>
+
+<h3 id="the-logic-app">The logic app</h3>
+
+<p>The complete code of the app at the end of this article. I’ll go through the main steps with some description</p>
+
+<p><img src="/assets/images/posts/2020/logic-app-trigger.png" alt="logic app trigger"></p>
+
+<p>The logic app is triggered by an http trigger. This way I can call it from another logic app that fetch the secrets from key vault. So I can reuse and share this one without worrying about secret management</p>
+
+<p><img src="/assets/images/posts/2020/logic-app-access-token-dbricks.png" alt="Access token for databricks login app"></p>
+
+<p>This is the first access token. we get Azure AD access token for <strong>the Databricks login app</strong> that will be used to access the Databricks instance</p>
+
+<p>This step is followed by a step to parse the return json to get the access token out of it.</p>
+
+<p>Next is to issue almost identical REST API call to authenticate with only one difference is the resource=<strong>https://management.core.windows.net/</strong></p>
+
+<p><img src="/assets/images/posts/2020/logic-app-list-clusters.png" alt="list clusters API"></p>
+
+<p>This is the first API call to Databricks. There’s another one later in the app but the principal is the same so I’ll explain here this one only.</p>
+
+<p><strong>URL:</strong> The URL is on the format **https://<databricks instance="" name="">..azuredatabricks.net/api/2.0/clusters/list** so I concatenated the input parameter into the URL</databricks></p>
+
+<p><strong>Headers:</strong></p>
+
+<p>​		<strong>Authorization:</strong> the concatenation of the keyword <strong>Bearer</strong> and the access token we got for the <u>Databricks login app (where the resource is the app id)</u></p>
+
+<p>​		<strong>X-Databricks-Azure-SP-Management-Token:</strong> The access token (without Bearer keyword) of the Azure management endpoint</p>
+
+<p>​		<strong>X-Databricks-Azure-Workspace-Resource-Id:</strong> The resource Id of the workspace, I used the input parameters of the workspace name, resource group name and subscription id to create it.</p>
+
+<p>And here’s the complete code of the logic app</p>
+
+<noscript><pre>400: Invalid request</pre></noscript>
+<script src="https://gist.github.com/cbff418e7158a499d5fd6b4e389063ab.js"> </script>
+
+
+            </div>
+            <footer class="post-footer">
+                
+                <p class="post-tags">
+                     
+                    <a href="tag/databricks/">Databricks</a>
+                    
+                    
+                </p>
+                
+                <div class="post-share">
+                    <span class="post-share-title">Share:</span>
+                    <a target="_blank" href="https://twitter.com/share?text=Call+Databricks+API+from+Logic+Apps&amp;url=https://cloudsafari.ca/2020/10/data-platform/Call-Databricks-APIs">Twitter</a>
+                    <a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://cloudsafari.ca/2020/10/data-platform/Call-Databricks-APIs">Facebook</a>
+                </div>
+<!-- .share-post -->
+            </footer>
+            <div class="author-box">
+                <div class="author-avatar"><img src="/assets/images/authorimage.jpg" alt="Mohamed Sharaf's Picture" class="avatar"></div>
+                <div class="author-details">
+                    <h2 class="author-title">About Mohamed Sharaf</h2>
+                    <p class="author-description">Mohamed Sharaf, Cloud Solution Architect at Microsoft and curious to learn something new. Love intelligent debate and knowing intelligent people. Amateur cyclist though I do not think I will write about my hobby here. This blog is my personal way to provide high quality material to help a fellow learner understand something, anything. I will not write until there is something worth writing and I will try to update it and engage with comments regularly.</p>
+                </div>
+            </div>
+            
+<section id="comments-area" class="comments-area">
+    <h2 class="comments-title">Comments</h2>
+    <div class="comments-inside">
+        <div id="disqus_thread"></div>
+    </div>
+<!-- .comments-inside -->
+    <div id="comments-overlay" class="comments-overlay">
+        <a href="#" id="comments-show" class="comments-show">Show comments</a>
+    </div>
+<!-- .comments-overlay -->
+    <script type="text/javascript">
+        var disqus_shortname = 'cloudsafari-ca';
+        var disqus_developer = 0;
+        (function () {
+            var dsq = document.createElement('script');
+            dsq.type = 'text/javascript';
+            dsq.async = true;
+            dsq.src = window.location.protocol + '//' + disqus_shortname + '.disqus.com/embed.js';
+            dsq.setAttribute('data-timestamp', +new Date());
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by
+            Disqus.</a>
+</noscript>
+    <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+</section>
+
+
+        </article>
+        
+        <section class="read-next inner">
+            <h2 class="read-next-title">Read Next</h2>
+            
+            <article class="post">
+                <header class="post-header">
+                    <div class="post-meta">
+                        <time class="published" datetime="September 13, 2020">September 13, 2020</time>
+                    </div>
+                    <h3 class="post-title"><a href="/2020/09/data-engineering/Azure-DataFactory-Cancel-Pipeline-Run">Cancel Data Factory Pipeline Run </a></h3>
+                    <p class="post-tags">
+                        
+                        
+                        
+                        <a href="/tag/data-factory/">Data-factory</a>
+                        
+                        
+                        
+                        <a href="/tag/pipeline-run/">Pipeline-run</a>
+                        
+                        
+                        
+                    </p>
+                </header>
+                
+                <a href="/2020/09/data-engineering/Azure-DataFactory-Cancel-Pipeline-Run" class="post-thumbnail">
+                    <img src="/assets/images/posts/2020/ADF-thumbnail.jpg" alt="Cancel Data Factory Pipeline Run ">
+                </a>
+                
+            </article>
+            
+            
+            <article class="post">
+                <header class="post-header">
+                    <div class="post-meta">
+                        <time class="published" datetime="February 13, 2021">February 13, 2021</time>
+                    </div>
+                    <h3 class="post-title"><a href="/2021/02/data-platform/Data-Analytics-Review">Data Analytics Basics - Critical Review</a></h3>
+                    <p class="post-tags">
+                        
+                        
+                        
+                        <a href="/tag/data-lake/">Data-lake</a>
+                        
+                        
+                        
+                        <a href="/tag/data-warehouse/">Data-warehouse</a>
+                        
+                        
+                        
+                        <a href="/tag/data-hub/">Data-hub</a>
+                        
+                        
+                        
+                    </p>
+                </header>
+                
+                <a href="/2021/02/data-platform/Data-Analytics-Review" class="post-thumbnail">
+                    <img src="/assets/images/posts/2021/analytics-thumbnail.jpg" alt="Data Analytics Basics - Critical Review">
+                </a>
+                
+            </article>
+            
+        </section><!-- .read-next -->
+    </main><!-- .site-main -->
+</div>
+<!-- .site-content -->
+
+        
+
+        
+
+        <footer id="colophon" class="site-footer outer">
+            <div class="site-footer-inside">
+                <p class="social-links">
+    
+    <a href="https://twitter.com/@mohamsharaf" target="_blank">
+        <span class="fa-twitter fa" aria-hidden="true"></span>
+        <span class="screen-reader-text">Twitter</span>
+    </a>
+    
+    
+    
+    <a href="https://github.com/mosharafMS" target="_blank">
+        <span class="fa-github fa" aria-hidden="true"></span>
+        <span class="screen-reader-text">GitHub</span>
+    </a>
+    
+    
+    
+    
+    <a href="https://medium.com/@mohamed.sharaf" target="_blank">
+        <span class="fa-medium fa" aria-hidden="true"></span>
+        <span class="screen-reader-text">medium</span>
+    </a>
+    
+    
+    
+    
+    <a href="https://www.linkedin.com/in/mosharafms" target="_blank">
+        <span class="fa-linkedin fa" aria-hidden="true"></span>
+        <span class="screen-reader-text">Linkedin</span>
+    </a>
+    
+    
+</p>
+                <p class="site-info">
+                    <a href="#">CloudSafari</a> © 2021 . <br>
+                    Powered by <a target="_blank" href="https://jekyllrb.com/">Jekyll</a>.
+                </p>
+                <p class="back-to-top">
+                    <a id="top-button" class="top-button" href="#page">
+                        <span class="icon-arrow-up" aria-hidden="true"></span>
+                        <span class="screen-reader-text">Back to top</span>
+                    </a>
+                </p>
+            </div>
+<!-- .site-footer-inside -->
+        </footer><!-- .site-footer -->
+    </div>
+<!-- .site -->
+    <div id="site-overlay" class="site-overlay"></div>
+    <aside id="sidebar" class="sidebar">
+	<div class="sidebar-scrollable">
+		<div class="sidebar-inside">
+			<button id="sidebar-hide" class="sidebar-toggle"><span class="screen-reader-text">Close Sidebar</span><span aria-hidden="true" class="icon-close"></span></button>
+			<nav id="sidebar-navigation" class="widget site-navigation">
+				<h2 class="widget-title">Explore Site</h2>
+				<ul class="menu">
+					
+						<li class="menu-item"><a href="/about/">About</a></li>
+					
+				</ul>
+			</nav>
+			
+<section class="widget widget-text">
+    <h2 class="widget-title">About CloudSafari</h2>
+    <p>CloudSafari is my personal window to share about my work and technical projects. All information are provided as is and my views only represent myself</p>
+</section>
+
+
+<section class="widget widget-recent-posts">
+    <h2 class="widget-title">Recent Articles</h2>
+    <ul>
+        
+        <li>
+            <div class="post-header">
+                <div class="post-meta">
+                    <time class="published" datetime="??">February 13, 2021</time>
+                </div>
+                <div class="post-title">
+                    <a href="/2021/02/data-platform/Data-Analytics-Review">Data Analytics Basics - Critical Review</a>
+                </div>
+            </div>
+            
+            <a class="post-thumbnail" href="/2021/02/data-platform/Data-Analytics-Review">
+                <img src="/assets/images/posts/2021/analytics-thumbnail.jpg" alt="Data Analytics Basics - Critical Review">
+            </a>
+            
+        </li>
+        
+        <li>
+            <div class="post-header">
+                <div class="post-meta">
+                    <time class="published" datetime="??">October 26, 2020</time>
+                </div>
+                <div class="post-title">
+                    <a href="/2020/10/data-platform/Call-Databricks-APIs">Call Databricks API from Logic Apps</a>
+                </div>
+            </div>
+            
+            <a class="post-thumbnail" href="/2020/10/data-platform/Call-Databricks-APIs">
+                <img src="/assets/images/posts/2020/databricks-api-thumbnail.png" alt="Call Databricks API from Logic Apps">
+            </a>
+            
+        </li>
+        
+        <li>
+            <div class="post-header">
+                <div class="post-meta">
+                    <time class="published" datetime="??">September 13, 2020</time>
+                </div>
+                <div class="post-title">
+                    <a href="/2020/09/data-engineering/Azure-DataFactory-Cancel-Pipeline-Run">Cancel Data Factory Pipeline Run </a>
+                </div>
+            </div>
+            
+            <a class="post-thumbnail" href="/2020/09/data-engineering/Azure-DataFactory-Cancel-Pipeline-Run">
+                <img src="/assets/images/posts/2020/ADF-thumbnail.jpg" alt="Cancel Data Factory Pipeline Run ">
+            </a>
+            
+        </li>
+        
+    </ul>
+</section>
+
+<!-- Create a sorted array of tags -->
+ 
+<section class="widget widget-tagcloud">
+    <h2 class="widget-title">Tags</h2>
+    <div class="tagcloud">
+        
+        <a href="https://cloudsafari.ca/tag/azure-databricks/">Azure-Databricks</a>
+        
+        <a href="https://cloudsafari.ca/tag/azure-firewall/">Azure-Firewall</a>
+        
+        <a href="https://cloudsafari.ca/tag/data-factory/">Data-Factory</a>
+        
+        <a href="https://cloudsafari.ca/tag/data-hub/">Data-Hub</a>
+        
+        <a href="https://cloudsafari.ca/tag/data-lake/">Data-Lake</a>
+        
+        <a href="https://cloudsafari.ca/tag/data-warehouse/">Data-Warehouse</a>
+        
+        <a href="https://cloudsafari.ca/tag/databricks/">Databricks</a>
+        
+        <a href="https://cloudsafari.ca/tag/pipeline-run/">Pipeline-Run</a>
+        
+        <a href="https://cloudsafari.ca/tag/vnet/">VNET</a>
+        
+    </div>
+</section>
+
+
+		</div>
+<!-- .sidebar-inside -->
+	</div>
+<!-- .sidebar-scrollable -->
+</aside><!-- .sidebar -->
+    
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-177612139-1"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'UA-177612139-1', { 'anonymize_ip': true });
+  </script>
+  <script type="text/javascript">
+    (function(c,l,a,r,i,t,y){
+        c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+        t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+        y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+    })(window, document, "clarity", "script", "5ei8glh2oh");
+</script>
+
+    <!-- Javascript Assets -->
+    <script src="/assets/js/jquery-3.3.1.min.js"></script>
+    <script src="/assets/js/plugins.js"></script>
+    <script src="/assets/js/custom.js"></script>
+
+</body>
+
+</html>

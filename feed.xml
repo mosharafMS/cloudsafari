@@ -1,0 +1,424 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>CloudSafari</title>
+    <description>CloudSafari is my personal window to share about my work and technical projects. All information are provided as is and my views only represent myself</description>
+    <link>/</link>
+    <atom:link href="/feed.xml" rel="self" type="application/rss+xml"/>
+    <pubDate>Fri, 19 Feb 2021 16:10:20 +0000</pubDate>
+    <lastBuildDate>Fri, 19 Feb 2021 16:10:20 +0000</lastBuildDate>
+    <generator>Jekyll v3.6.3</generator>
+    
+      <item>
+        <title>Data Analytics Basics - Critical Review</title>
+        <description>&lt;p&gt;I had the pleasure recently to deliver a session at the &lt;a href=&quot;https://architecture.geekle.us/&quot;&gt;Worldwide Software Architecture Summit&lt;/a&gt;. I see a rise of more virtual-only events phenomenon even beyond Covid as many now realized that the value/cost balance for these events is very positive.&lt;/p&gt;
+
+&lt;p&gt;In this post, I will try to summarize the talk in few paragraphs.&lt;/p&gt;
+
+&lt;p&gt;The talk -as implied by the title- is trying to discuss the basics but away from the restraints of what’s hot these days. I also wanted to be vendor-neutral as the conference track’s objective to discuss the architecture away from the vendor specifics. These are the main points 
+&lt;!--more--&gt;&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;When a customer lists the data sources that they are interested in including in their data warehouse, they typically ignore two types of data
+    &lt;ul&gt;
+      &lt;li&gt;Dark Data: That’s the data collected from websites logs, telemetry and not analyzed for long term&lt;/li&gt;
+      &lt;li&gt;External (contextual) Data: That’s the data that might be collected &lt;em&gt;about&lt;/em&gt; the business not by the business itself. Examples: social media mentions to the company or the products, analysts/news agencies publishing about the company or the products&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Data warehouse &lt;em&gt;is a logical architecture&lt;/em&gt; not a &lt;u&gt;product&lt;/u&gt;. Many products can act as a data warehouse. I gave an example of a SQL Database used as a data warehouse when MPP architecture is not needed&lt;/li&gt;
+  &lt;li&gt;Data Lake is a &lt;em&gt;concept&lt;/em&gt; that -to be realized- requires many products from the same or different vendors to be used together. Not one product currently in the market that I’m aware of can create a complete data warehouse.&lt;/li&gt;
+  &lt;li&gt;Data Lake storage is just storage. You can think of it as your laptop drive. you save files on it. These files can be of a special type that represent data (csv, parquet, avro…) or just files like pictures. The repeated marketing messages of storing structured, un-structured and semi-structured data gave many people the impression that there is some magic there
+    &lt;ul&gt;
+      &lt;li&gt;Before you passionately disagree, yes there are great technologies packed into the storage to make it accessible to multiple nodes/machines with multiple threads accessing the same file. That and other differences related to availability &amp;amp; disaster recovery are masked by the cloud providers and since my scope is cloud so I wont go into the details of making a hard drive =&amp;gt; data lake :)&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Data Lake storage doesn’t have indexes or statistics by itself. You need to have a big data cluster like spark to load the files into data structured that are indexed. New technologies like &lt;a href=&quot;https://delta.io/&quot;&gt;Delta Lakes&lt;/a&gt; give extra layer of transactional consistency to the parquet files but still the performance of the relational databases is superior to the lakes&lt;/li&gt;
+  &lt;li&gt;Data Hub is a &lt;em&gt;logical architecture&lt;/em&gt; which enables data sharing. I see this ignored/avoided at many customers discussions mainly because the data team is mainly consists of data engineers &amp;amp; data scientists and neither of them -typically- have experience in Enterprise integration APIs/service bus. In my opinion that shouldn’t hinder the architect from considering this as a logical component that can be physically satisfied by many implementations. A csv file on a blob/file container can be your data hub. I see SFTP in many cases upgraded to be a data hub. All these are accepted to some extend as long as in the original blueprint data hub was a basic component and didn’t just put there without holistic understanding of its function.&lt;/li&gt;
+  &lt;li&gt;Relational Data Warehouses are not dead and according to Gartner many organizations are planning to use it. I see dependency on &lt;strong&gt;only data lake&lt;/strong&gt; is un-natural and will cause the failure of the data analytics project when trying to force it on the data team.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;These are the main messages and I hope I could convey them to you to the best of my knowledge. &lt;a href=&quot;/assets/docs/Data Analytics Architecture.pdf&quot;&gt;The slide deck are here&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;I’m also adding the recorded session (the recording was not live) here&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;{https://www.youtube.com/watch?v=XfTJwdPGjko}&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+</description>
+        <pubDate>Sat, 13 Feb 2021 00:00:00 +0000</pubDate>
+        <link>/2021/02/data-platform/Data-Analytics-Review</link>
+        <guid isPermaLink="true">/2021/02/data-platform/Data-Analytics-Review</guid>
+        
+        <category>Data-Lake</category>
+        
+        <category>Data-Warehouse</category>
+        
+        <category>Data-Hub</category>
+        
+        
+        <category>Data-platform</category>
+        
+      </item>
+    
+      <item>
+        <title>Call Databricks API from Logic Apps</title>
+        <description>&lt;p&gt;Recently I needed to help a customer to call Databricks API and since there are many ways to do this I must start by scoping the scenario&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;This is Azure Databricks not Databricks on another cloud provider.&lt;/li&gt;
+  &lt;li&gt;Authentication can be done by 3 ways
+    &lt;ul&gt;
+      &lt;li&gt;Azure Databricks &lt;a href=&quot;https://docs.microsoft.com/en-us/azure/databricks/dev-tools/api/latest/authentication&quot;&gt;Personal Access Token&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;Using Azure AD access token &lt;a href=&quot;https://docs.microsoft.com/en-us/azure/databricks/dev-tools/api/latest/aad/app-aad-token#use-token&quot;&gt;for a user&lt;/a&gt; so we need to impersonate a user access to access Databricks&lt;/li&gt;
+      &lt;li&gt;Using Azure AD access token &lt;a href=&quot;https://docs.microsoft.com/en-us/azure/databricks/dev-tools/api/latest/aad/service-prin-aad-token#use-token&quot;&gt;for service principal&lt;/a&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;In this scenario we chose using service principal because it will be used by a service &lt;strong&gt;because&lt;/strong&gt; I’d like to keep all the identities centralized in Azure AD for easy management.&lt;/li&gt;
+  &lt;li&gt;The APIs that we needed are to list running clusters and terminate them. auto-terminate wasn’t an option because of some restrictions related to this implementation.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;the-chosen-service-to-run-the-automation&quot;&gt;The chosen service to run the automation&lt;/h3&gt;
+
+&lt;p&gt;We chose &lt;a href=&quot;https://docs.microsoft.com/en-us/azure/logic-apps/logic-apps-overview&quot;&gt;Logic Apps&lt;/a&gt; for simplicity however all what we are doing is calling REST APIs so whether it’s logic apps, Function app, automation runbook or any other service hosted inside a VM it’s the same concept&lt;/p&gt;
+
+&lt;h3 id=&quot;the-workflow&quot;&gt;The workflow&lt;/h3&gt;
+
+&lt;p&gt;The workflow I’m using as illustrated by the diagram below&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/posts/2020/databricks-api-calls.png&quot; alt=&quot;Calling Databricks API workflow&quot; /&gt;&lt;/p&gt;
+
+&lt;ul class=&quot;task-list&quot;&gt;
+  &lt;li class=&quot;task-list-item&quot;&gt;&lt;input type=&quot;checkbox&quot; class=&quot;task-list-item-checkbox&quot; disabled=&quot;disabled&quot; /&gt;Get Access token for the Databricks login app&lt;/li&gt;
+  &lt;li class=&quot;task-list-item&quot;&gt;&lt;input type=&quot;checkbox&quot; class=&quot;task-list-item-checkbox&quot; disabled=&quot;disabled&quot; /&gt;Get Access token for the Azure management endpoint&lt;/li&gt;
+  &lt;li class=&quot;task-list-item&quot;&gt;&lt;input type=&quot;checkbox&quot; class=&quot;task-list-item-checkbox&quot; disabled=&quot;disabled&quot; /&gt;Use the two tokens when calling any Databricks API&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;strong&gt;But why two access tokens?&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;​          Because Databricks is very well integrated into Azure using the Databricks resource provider, some APIs requires Azure management (think of anything you can change from the Azure portal) and some require login to the Databricks workspace (i.e listing and updating clusters) however the APIs designed in a way to require both tokens for all of them (or at least up to my knowledge). For that we have to do two API calls to the Azure AD login endpoint&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;What’s he difference between the two API calls?&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;Both are identical except for the resource to get the access token to. In Azure AD, you must specify why do you need access token. Meaning what resource you want to access by this token so Azure will get you a token &lt;u&gt;*only*&lt;/u&gt; for this service. For the Databricks login app, you must use the guid “&lt;strong&gt;2ff814a6-3304-4ab8-85cb-cd0e6f879c1d&lt;/strong&gt;” which if you navigate to Azure portal and searched for this id, you will find it associated with enterprise app named AzureDatabricks. This is the app representing Databricks to facilitate login to the workspace&lt;/p&gt;
+
+&lt;h3 id=&quot;collecting-the-requirements&quot;&gt;Collecting the requirements&lt;/h3&gt;
+
+&lt;p&gt;&lt;strong&gt;App info&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;To start getting the access tokens, we need the service principal info. Provided that you have app registration already created in Azure AD. The process to provision he service principal is &lt;a href=&quot;https://docs.microsoft.com/en-us/azure/databricks/dev-tools/api/latest/aad/service-prin-aad-token#--provision-a-service-principal-in-azure-portal&quot;&gt;documented well in the docs&lt;/a&gt; so no need to repeat it&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;In this context we can use Azure AD app &amp;amp; service principal interchangeably. However they are not both the same. App is one instance that can be shared across multiple directories (Databricks login app is example ) and the service principal is the representation of this app inside the directory. When we authorize, we authorize the service principal not the app.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/posts/2020/AAD-App-info.png&quot; alt=&quot;App Info page in Azure AD&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;From the App info page, collect&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Client ID&lt;/li&gt;
+  &lt;li&gt;Tenant ID&lt;/li&gt;
+  &lt;li&gt;Then navigate to the &lt;em&gt;Certificates &amp;amp; Secrets&lt;/em&gt; page from the left navigation bar and generate a secret.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Consider all these information as secrets and you should keep them safely in a keyvault or a similar secret management solution. The logic app I’m including with this article expect all these as input so it doesn’t save or retrieve secrets. I made it this way to be re-usable. More to this later&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Azure Resource info&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;Databricks workspace is an Azure resource, you need to collect&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;subscription id&lt;/li&gt;
+  &lt;li&gt;resource group name&lt;/li&gt;
+  &lt;li&gt;workspace name&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;We will use them later inside the log app to generate the resource id&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Databricks instance&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;All the Databricks URLs are using the instance name which is what comes before &lt;em&gt;azuredatabricks.net&lt;/em&gt; in the URL when you login to the Databricks UI. It’s auto generated and usually starts with &lt;em&gt;adb-&lt;/em&gt; then numbers&lt;/p&gt;
+
+&lt;h3 id=&quot;the-logic-app&quot;&gt;The logic app&lt;/h3&gt;
+
+&lt;p&gt;The complete code of the app at the end of this article. I’ll go through the main steps with some description&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/posts/2020/logic-app-trigger.png&quot; alt=&quot;logic app trigger&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;The logic app is triggered by an http trigger. This way I can call it from another logic app that fetch the secrets from key vault. So I can reuse and share this one without worrying about secret management&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/posts/2020/logic-app-access-token-dbricks.png&quot; alt=&quot;Access token for databricks login app&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;This is the first access token. we get Azure AD access token for &lt;strong&gt;the Databricks login app&lt;/strong&gt; that will be used to access the Databricks instance&lt;/p&gt;
+
+&lt;p&gt;This step is followed by a step to parse the return json to get the access token out of it.&lt;/p&gt;
+
+&lt;p&gt;Next is to issue almost identical REST API call to authenticate with only one difference is the resource=&lt;strong&gt;https://management.core.windows.net/&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/posts/2020/logic-app-list-clusters.png&quot; alt=&quot;list clusters API&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;This is the first API call to Databricks. There’s another one later in the app but the principal is the same so I’ll explain here this one only.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;URL:&lt;/strong&gt; The URL is on the format **https://&lt;Databricks Instance=&quot;&quot; Name=&quot;&quot;&gt;..azuredatabricks.net/api/2.0/clusters/list** so I concatenated the input parameter into the URL&lt;/Databricks&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Headers:&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;​		&lt;strong&gt;Authorization:&lt;/strong&gt; the concatenation of the keyword &lt;strong&gt;Bearer&lt;/strong&gt; and the access token we got for the &lt;u&gt;Databricks login app (where the resource is the app id)&lt;/u&gt;&lt;/p&gt;
+
+&lt;p&gt;​		&lt;strong&gt;X-Databricks-Azure-SP-Management-Token:&lt;/strong&gt; The access token (without Bearer keyword) of the Azure management endpoint&lt;/p&gt;
+
+&lt;p&gt;​		&lt;strong&gt;X-Databricks-Azure-Workspace-Resource-Id:&lt;/strong&gt; The resource Id of the workspace, I used the input parameters of the workspace name, resource group name and subscription id to create it.&lt;/p&gt;
+
+&lt;p&gt;And here’s the complete code of the logic app&lt;/p&gt;
+
+&lt;noscript&gt;&lt;pre&gt;400: Invalid request&lt;/pre&gt;&lt;/noscript&gt;
+&lt;script src=&quot;https://gist.github.com/cbff418e7158a499d5fd6b4e389063ab.js&quot;&gt; &lt;/script&gt;
+
+</description>
+        <pubDate>Mon, 26 Oct 2020 00:00:00 +0000</pubDate>
+        <link>/2020/10/data-platform/Call-Databricks-APIs</link>
+        <guid isPermaLink="true">/2020/10/data-platform/Call-Databricks-APIs</guid>
+        
+        <category>Databricks</category>
+        
+        
+        <category>Data-Platform</category>
+        
+      </item>
+    
+      <item>
+        <title>Cancel Data Factory Pipeline Run </title>
+        <description>&lt;p&gt;In some cases you want to end the &lt;a href=&quot;https://docs.microsoft.com/en-us/azure/data-factory/&quot;&gt;Azure Data Factory&lt;/a&gt; (ADF) pipeline execution based on a logic in the pipeline itself. For example, when there’s no record coming from one of the inputs datasets then you need to fail quickly to either reduce cost or to avoid any logical errors.&lt;/p&gt;
+
+&lt;p&gt;The challenge is there’s no activity in ADF that cancels execution. In this case, the &lt;a href=&quot;https://docs.microsoft.com/en-us/azure/data-factory/control-flow-web-activity&quot;&gt;web activity&lt;/a&gt; comes handy&lt;/p&gt;
+
+&lt;p&gt;Let’s take a quick example, in the picture below, a simple logic pipeline that sets a variable to true and then based on the value of the variable, it has &lt;em&gt;If Condition&lt;/em&gt; activity to cancel the pipeline execution when it’s true (of course it’s always true in this example, but you get the point)
+&lt;img src=&quot;/assets/images/posts/2020/adf-logic.png&quot; alt=&quot;simple logic pipeline&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Inside the true branch of the &lt;em&gt;If Condition&lt;/em&gt; add &lt;em&gt;Web&lt;/em&gt; activity (under general) 
+&lt;img src=&quot;/assets/images/posts/2020/adf-web-activity.png&quot; alt=&quot;Web Activity&quot; /&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;now-what-are-we-trying-to-do&quot;&gt;Now what are we trying to do?&lt;/h3&gt;
+&lt;p&gt;Since there’s no activity then we need to call the ADF REST API which is part of the Azure Resource Manager (https://management.azure.com) .
+The API we are interested in is the &lt;a href=&quot;https://docs.microsoft.com/en-us/rest/api/datafactory/pipelineruns/cancel&quot;&gt;Cancel Pipeline Run API&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;The API format 
+POST https://management.azure.com/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/pipelineruns/{runId}/cancel?api-version=2018-06-01
+Luckily the {factoryName} and the {runId} can be obtained using ADF functions during runtime (with a catch) using &lt;code class=&quot;highlighter-rouge&quot;&gt;pipeline().DataFactory&lt;/code&gt; and &lt;code class=&quot;highlighter-rouge&quot;&gt;pipeline().RunId&lt;/code&gt; respectively&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;What’s the catch?&lt;/strong&gt; 
+The &lt;code class=&quot;highlighter-rouge&quot;&gt;RunId&lt;/code&gt; doesn’t work when execute the pipeline under debug mode. You need to trigger the pipeline to get the correct &lt;code class=&quot;highlighter-rouge&quot;&gt;RunId&lt;/code&gt;
+That makes the REST call like this&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;@concat('https://management.azure.com/subscriptions/***subscriptionID***/resourceGroups/***resource group name***/providers/Microsoft.DataFactory/factories/',pipeline().DataFactory,'/pipelineruns/',pipeline().RunId,'/cancel?api-version=2018-06-01')
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;strong&gt;How about authentication?&lt;/strong&gt;
+Correct, ARM REST API calling can be daunting because of the oauth authentication workflows. Fortunately the &lt;em&gt;Web&lt;/em&gt; activity supports &lt;a href=&quot;https://docs.microsoft.com/en-us/azure/data-factory/data-factory-service-identity&quot;&gt;&lt;em&gt;Managed (Service) Identity&lt;/em&gt;&lt;/a&gt; . In nutshell, every Data Factory instance has a service identity created in Azure AD to be used by this instance.&lt;/p&gt;
+
+&lt;p&gt;The settings page should look like this&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/posts/2020/ADF-web-activity-settings.png&quot; alt=&quot;Web Activity Settings&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Note that the &lt;code class=&quot;highlighter-rouge&quot;&gt;resource&lt;/code&gt; is the resource that you want to connect to which is the Azure Resource Manager (ARM) API ==&amp;gt; https://management.azure.com&lt;/p&gt;
+
+&lt;p&gt;If you run the pipeline this way, probably you will get access denied error because this managed identity doesn’t have permissions to stop the pipeline run for this data factory. To grant this permission, assign the managed identity the Data Factory contributor Role (least privileged) or Contributor role (more privileged)&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;Note:&lt;/p&gt;
+  &lt;blockquote&gt;
+    &lt;p&gt;The Managed Identity name is the same name as the data factory
+There’s optional parameter to this API to cancel recursively so if the pipeline calls another pipeline, the called pipeline will be cancelled as well&lt;/p&gt;
+  &lt;/blockquote&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;The json for the web activity is added in this code snippet.&lt;/p&gt;
+
+&lt;noscript&gt;&lt;pre&gt;400: Invalid request&lt;/pre&gt;&lt;/noscript&gt;
+&lt;script src=&quot;https://gist.github.com/5bc65274365efc0bc861dae5849d72ce.js&quot;&gt; &lt;/script&gt;
+
+&lt;!--stackedit_data:
+eyJoaXN0b3J5IjpbMTIwMDc5MDY5OSwxODg0MzEwODMsLTE4ND
+AwNDg0NzYsNzEzMzI0OTE4LDE5Njc1ODY5NTksOTA2NjI0MTY5
+XX0=
+--&gt;
+</description>
+        <pubDate>Sun, 13 Sep 2020 00:00:00 +0000</pubDate>
+        <link>/2020/09/data-engineering/Azure-DataFactory-Cancel-Pipeline-Run</link>
+        <guid isPermaLink="true">/2020/09/data-engineering/Azure-DataFactory-Cancel-Pipeline-Run</guid>
+        
+        <category>Data-Factory</category>
+        
+        <category>Pipeline-Run</category>
+        
+        
+        <category>Data-Engineering</category>
+        
+      </item>
+    
+      <item>
+        <title>Azure Databricks Deep Dive-Networking</title>
+        <description>&lt;p&gt;This is an updated version of my article at &lt;a href=&quot;https://medium.com/cloudsafari-ca/azure-databricks-deployments-issues-3195ea8c7f56&quot;&gt;Medium.com&lt;/a&gt; originally written on December 2019 as some changes happened since then&lt;/p&gt;
+
+&lt;p&gt;Azure Databricks  &lt;a href=&quot;https://docs.microsoft.com/en-us/azure/databricks/workspace/&quot;&gt;workspace&lt;/a&gt; is a code authoring and collaboration workspace that can have one or more Apache Spark clusters. So as a prerequisites to create the cluster, there has to be a  &lt;a href=&quot;https://docs.microsoft.com/en-us/azure/virtual-network/virtual-networks-overview&quot;&gt;Virtual Network (VNET)&lt;/a&gt;  to have the machines attached to itd. That’s why in the managed resource group, if you don’t choose to use your own VNET, there will be a VNET created for you.&lt;/p&gt;
+
+&lt;p&gt;Many organizations have restrictions about the VNET creation and prefer to integrate the Databricks clusters into their network infrastructure, that’s why Azure Databricks now supports VNET injection. VNET injection enable you to use an existing VNET for hosting the Databricks clusters.&lt;/p&gt;
+
+&lt;p&gt;The  &lt;a href=&quot;https://docs.microsoft.com/en-us/azure/databricks/administration-guide/cloud-configurations/azure/vnet-inject&quot;&gt;docs&lt;/a&gt;  are listing the benefits &amp;amp; the requirements of these VNETs so I won’t list all of them here however the most important ones&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Have to be in the same subscription&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Address space:&lt;/strong&gt;  A CIDR block between /16 — /24 for the virtual network and a CIDR block up to /26 for the private and public subnets&lt;/li&gt;
+  &lt;li&gt;Two subnet per workspace&lt;/li&gt;
+  &lt;li&gt;Can’t use the same subnet by two workspaces –&amp;gt; That means every time there’s a new workspace, there’s quite a checklist to go through which makes the idea of hosting multiple projects/departments on the same workspace a favorable idea but that’s the topic of another article.&lt;/li&gt;
+  &lt;li&gt;
+    &lt;hr /&gt;
+    &lt;p&gt;&lt;strong&gt;But first, what’s deployed inside the customer’s VNET? is Azure Databricks entirely deployed there?&lt;/strong&gt;
+No, the control plane and web UI are always deployed in a Microsoft-managed subscription. That’s why the Azure Databrisk UI is always https://&amp;lt; Azure Region &amp;gt;.azuredatabricks.net&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/posts/2020/dbricks-vnet-architecture.png&quot; alt=&quot;Azure Databricks Network Architecture&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;During workspace deployment, there’s no clusters created yet. So during deployment, Databricks would insure that the minimum requirements for the clusters to be successfully deployed are met.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;What happens during deployment time?&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/posts/2020/dbricks-creation-flowchart-network.png&quot; alt=&quot;Azure Databricks Creation Flowchart&quot; /&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Delegation to Microsoft.Databricks/workspaces is made on each subnet. This delegation will be used by the service to create a Network Intent Policy. Azure Network Intent Policy is a feature used by some Microsoft first party providers like SQL Managed Instance. It’s not available for customers’ use as there’s no public docs for it. In the case of Databricks, it’s used to maintain the NSG rules added by the workspace creation. If you try to delete one of the rules, you will get an error message because of the Intent Policy.&lt;/li&gt;
+  &lt;li&gt;Check if there’s already an NSG attached to the subnet. If not then the creation of the workspace will fail. In the portal experience, the ARM template generated by the portal is avoiding the failure by creating an NSG and attach it. It will create only one NSG for both private &amp;amp; public subnets. The rules are identical anyways even if you provided two NSGs, you will find the same set of rules.&lt;/li&gt;
+  &lt;li&gt;If there’s NSG attached, new rules will be added and protected by the Intent Policy so it can’t be changed or deleted.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;I’ve created  &lt;a href=&quot;https://github.com/mosharafMS/ARM-Templates/tree/master/Databricks/vnetInjection&quot;&gt;a sample ARM template on github&lt;/a&gt;  that deploys Databricks workspace with VNET integration but you have to setup the delegation and attache NSGs to the subnet before you deploy the template&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;&lt;strong&gt;Why having two subnets?&lt;/strong&gt;
+Each machine in the Databricks cluster has two virtual network cards (NIC), one with private IP only attached to the private subnet and one with both private &amp;amp; public IPs attached to public subnets. The public IPs used to communicate between your cluster and the control plane of Azure Databricks plus any other data sources that might reside outside your Vnet. All the inter-cluster communication happens on the
+ &lt;strong&gt;Are the subnets exclusively used by the workspace clusters only?&lt;/strong&gt;
+No, you can use subnets that has NICs already attached to them. But you can’t have two different workspaces on the same subnet&lt;/p&gt;
+
+&lt;h2 id=&quot;integrating-azure-databricks-workspaces-with-firewalls&quot;&gt;Integrating Azure Databricks workspaces with firewalls&lt;/h2&gt;
+&lt;p&gt;On of the main reasons to have Azure Databricks workspaces integrated with VNET is to utilize your existing firewalls. The workflow to do that is&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;Create and assign Route Tables that  will  force the traffic from
+Azure Databricks to be filtered by the firewall first.&lt;/li&gt;
+  &lt;li&gt;In the firewall you add rules to allow the traffic needed for your workspace&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;The traffic coming to the public IPs of the workspace clusters,
+doesn’t pass on the firwall and if your routing route all 0.0.0.0/0 to
+the firewall that means the firewall will only see the return of the
+traffic and for any stateful firewall like Azure Firewall, it will
+drop the traffic. You have to add exception of the routing for the
+control plane. The screenshot below shows this problem. For a complete
+list of the IPs per region, refer to the &lt;a href=&quot;https://docs.microsoft.com/en-us/azure/databricks/administration-guide/cloud-configurations/azure/udr&quot;&gt;docs&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/posts/2020/assymetric-network.png&quot; alt=&quot;Asymmetric traffic&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Because of how stateful firewalls work , the routing table should avoid routing &lt;em&gt;ALL&lt;/em&gt; the traffic but to exclude the traffic going to the control plane and the web app of Databricks. Per each Azure region that has Databricks enabled in, there are two IP ranges, one for the control plane and one for the webapp. These are unique to the region and should be excluded from the routing. The screenshot below shows the routing for a databricks in Canada Central region.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/posts/2020/routing-table.png&quot; alt=&quot;Sample Routing Table&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;In my testing, I used &lt;a href=&quot;https://docs.microsoft.com/en-us/azure/firewall/overview&quot;&gt;Azure Firewall&lt;/a&gt; and I’ll list all the Network Rules and Application Rules I added to have a successful cluster creation and running sample notebook.&lt;/p&gt;
+
+&lt;h2 id=&quot;documented-rules&quot;&gt;Documented Rules&lt;/h2&gt;
+&lt;h3 id=&quot;dbfs-root-blob-storage-ip-address&quot;&gt;DBFS root Blob storage IP address&lt;/h3&gt;
+&lt;p&gt;Each workspace has a storage account created and managed by Databricks to act as the local file system of the clusters of this workspace. Also is used to save the notebooks. There’s a storage account per workspace in the managed resource group of the workspace. The naming convention of it is dbstorage &amp;lt; random alphanumeric string&amp;gt; 
+Until now, Databricks doesn’t use private endpoint for these storage accounts (something for the near future may be) so the traffic destined to this storage account has to pass through the firewall and you need to use Application Rule (by using the FQDN) to allow it. 
+I highly recommended not using something like &lt;code class=&quot;highlighter-rouge&quot;&gt;*.blob.core.windows.net&lt;/code&gt; because that allows the Databricks cluster to reach any storage account on Azure anywhere in the globe which will open the door for exfilteration attacks.&lt;/p&gt;
+
+&lt;h3 id=&quot;metastore-artifact-blob-storage-log-blob-storage-and-event-hub-endpoint-ip-addresses&quot;&gt;Metastore, artifact Blob storage, log Blob storage, and Event Hub endpoint IP addresses&lt;/h3&gt;
+&lt;p&gt;&lt;strong&gt;Metastore&lt;/strong&gt; is a mysql database where the metadata about the workspace is saved
+. Which means if you are using IP &amp;amp; port combination then you need to get the IP of the URL from the docs and use port 3306. For example for Canada Central&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;nslookup consolidated-canadacentral-prod-metastore.mysql.database.azure.com
+
+Name:    cr2.canadacentral1-a.control.database.windows.net
+Address:  52.228.35.221
+Aliases:  consolidated-canadacentral-prod-metastore.mysql.database.azure.com In Azure Firewall, we can use the FQDN in the network rules so there's no need to get the IP but if your firewall doesn't support that then get the IP and periodically update it.    **Artifact Blob storage** both primary &amp;amp; secondary storage accounts (which can be the same account in some regions) are the storage account where the scripts and the binary files of Databricks are saved at. 
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;strong&gt;Log Blob storage&lt;/strong&gt; is another storage used for cluster logs&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Event Hub endpoint&lt;/strong&gt; eventhub endpoint used for shipping logs as well. This is eventhub kafka so it uses port 9093. For more details, refer to the &lt;a href=&quot;https://docs.microsoft.com/en-us/azure/event-hubs/event-hubs-faq#what-ports-do-i-need-to-open-on-the-firewall&quot;&gt;docs&lt;/a&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;special-un-documented-domains&quot;&gt;Special un-documented domains&lt;/h2&gt;
+&lt;p&gt;During my testing with Azure Firewall &amp;amp; Databricks, I found that the docs didn’t cover all the FQDNs that are requested by my cluster. From my testing I found out these extra ones. I added what I collected about them from different sources and my decision&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;Ubuntu updates&lt;/strong&gt; Used for Ubuntu updates since Databricks is built on Ubuntu image ==&amp;gt; enabled  *.ubuntu.com&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;snap packages&lt;/strong&gt; Package management for Ubuntu ==&amp;gt; enabled  *.snapcraft.io&lt;/li&gt;
+  &lt;li&gt;terracotta → *.terracotta.org&lt;/li&gt;
+  &lt;li&gt;cloudflare → *.cloudflare.com&lt;/li&gt;
+  &lt;li&gt;ICMP Type 8 (Ping) to 172.217.13.164 which is an IP belongs to Google. I didn’t see any docs for it but since it’s just ping, I didn’t see an issue with that traffic. It can be a heartbeat to check if the server has connectivity with the internet. It can be due to exceptions raised by blocked URLs so the servers check connectivity.&lt;/li&gt;
+  &lt;li&gt;When accessing the quickstart notebook and read the sample data using this code
+    &lt;div class=&quot;language-sql highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;DROP&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;TABLE&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;IF&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;EXISTS&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;diamonds&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;CREATE&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;TABLE&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;diamonds&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;USING&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;csv&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;OPTIONS&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;path&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;&quot;/databricks-datasets/Rdatasets/data-001/csv/ggplot2/diamonds.csv&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;header&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;&quot;true&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;It will throw error and in the firewall logs, you will find deny access to &lt;em&gt;sts.amazonaws.com&lt;/em&gt; which means that the sample data still in S3 buckets. I didn’t allow this URL in this testing round but if you did, expect to have another URL or two to show up. These are the exact buckets that hosts the sample dataset. They will be * &amp;lt; bucket name&amp;gt;.s3.amazonaws.com*&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;nvidia.github.io&lt;/strong&gt; used to pull nvidia drivers. In my testing, I didn’t see any clusters that has GPUs but still the traffic to nvidia github pages was recorded so it seems it’s needed for all clusters not just GPU-equipped clusters.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;deb.nodesource.com&lt;/strong&gt; this is a shortcut to &lt;a href=&quot;https://github.com/nodesource/distributions&quot;&gt;https://github.com/nodesource/distributions&lt;/a&gt; which has node distribution packages&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;files.pythonhosted.org&lt;/strong&gt;  This site hosts packages and documentation uploaded by authors of packages on the &lt;a href=&quot;http://pypi.python.org/&quot;&gt;Python Package Index&lt;/a&gt;.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;UDP protocol on port 123&lt;/strong&gt;  for Network Time Protocol ==&amp;gt; created a network rule for UDP protocol with destination port 123&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;pypi.org&lt;/strong&gt; for python pypi packages&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Azure Monitor&lt;/strong&gt; In the testing we found two storage account not related to Databricks 
+&lt;em&gt;zrdfepirv2yto21prdstr02a.blob.core.windows.net&lt;/em&gt;
+&lt;em&gt;zrdfepirv2yt1prdstr06a.blob.core.windows.net&lt;/em&gt;	
+I’m still waiting final confirmation from the Azure monitor team but all the investigations leading to these are used by the Azure Monitor linux agent.
+&lt;strong&gt;Buy why we have a deny on Azure Monitor storage accounts when we enable the AzureMonitor service tag?&lt;/strong&gt;
+ There’s a trick in the AzureMonitor service tag, as per the &lt;a href=&quot;https://docs.microsoft.com/en-us/azure/virtual-network/service-tags-overview&quot;&gt;docs&lt;/a&gt; &lt;strong&gt;AzureMonitor&lt;/strong&gt; service tag has a dependency on the &lt;strong&gt;Storage&lt;/strong&gt; tag which means to be on the safe side you need to add the storage service tag in your Azure Firewall Network rules but that’s too much to allow all the traffic to all the storage accounts in a region. In my customer’s deployments, we depended on reading the logs with denied access and add these storage accounts one by one. This way is of course more restrictive and may fail after while when these storage accounts change but it’s better for security.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;I didn’t record a new video for the new setup but the one done on December 2019 still valid as a guide with this article.
+&lt;img src=&quot;{http://www.youtube.com/watch?v=U7Iw6g1_Rfg}&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;references&quot;&gt;References&lt;/h3&gt;
+&lt;p&gt;I’ve added the NetworkRules &amp;amp; ApplicationRules of Azure Firewall in these gists
+&lt;strong&gt;Network Rules&lt;/strong&gt;&lt;/p&gt;
+
+&lt;noscript&gt;&lt;pre&gt;400: Invalid request&lt;/pre&gt;&lt;/noscript&gt;
+&lt;script src=&quot;https://gist.github.com/1ae634e2df771b7eec453ce2a35ba727.js&quot;&gt; &lt;/script&gt;
+
+&lt;p&gt;&lt;strong&gt;Application Rules&lt;/strong&gt;&lt;/p&gt;
+
+&lt;noscript&gt;&lt;pre&gt;400: Invalid request&lt;/pre&gt;&lt;/noscript&gt;
+&lt;script src=&quot;https://gist.github.com/158f9dada9cb10657f8f0dd838138df4.js&quot;&gt; &lt;/script&gt;
+
+&lt;!--stackedit_data:
+eyJoaXN0b3J5IjpbLTE3MDQ0ODUzMjUsMzAyNzkxMTYyLDExNz
+Y0NjU4NjksLTE1MDAxOTg5NDksODUwMDE4NTc2LC03ODgyMDg5
+MDAsLTI3MjE1OTE1NywtMjY0MzMwODIzLDE1MzYyMzAyMzksLT
+c4ODgzOTM0LDEyMDMzMDM0MTIsLTE0NjY0ODE2NzcsMjAwMTQ1
+ODQxNCwxMDIxNTE1OTY2LDUxMTU1NTAzLDQ5NjEwOTc5MSwtMT
+AzOTE4NTE4Myw2NTI3NDAyNzQsLTEzNjkxNzkzOTcsMTYzNTQw
+ODE4NV19
+--&gt;
+</description>
+        <pubDate>Wed, 09 Sep 2020 00:00:00 +0000</pubDate>
+        <link>/2020/09/data-platform/Azure-Databricks-VNET-Integration</link>
+        <guid isPermaLink="true">/2020/09/data-platform/Azure-Databricks-VNET-Integration</guid>
+        
+        <category>Azure-Databricks</category>
+        
+        <category>Azure-Firewall</category>
+        
+        <category>VNET</category>
+        
+        
+        <category>Data-Platform</category>
+        
+      </item>
+    
+  </channel>
+</rss>

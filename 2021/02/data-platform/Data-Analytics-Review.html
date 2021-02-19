@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    
+        <!-- Begin Jekyll SEO tag v2.6.1 -->
+<title>Data Analytics Basics - Critical Review | CloudSafari</title>
+<meta name="generator" content="Jekyll v3.6.3">
+<meta property="og:title" content="Data Analytics Basics - Critical Review">
+<meta name="author" content="Mohamed Sharaf">
+<meta property="og:locale" content="en_US">
+<meta name="description" content="I had the pleasure recently to deliver a session at the Worldwide Software Architecture Summit. I see a rise of more virtual-only events phenomenon even beyond Covid as many now realized that the value/cost balance for these events is very positive.">
+<meta property="og:description" content="I had the pleasure recently to deliver a session at the Worldwide Software Architecture Summit. I see a rise of more virtual-only events phenomenon even beyond Covid as many now realized that the value/cost balance for these events is very positive.">
+<meta property="og:site_name" content="CloudSafari">
+<meta property="og:type" content="article">
+<meta property="article:published_time" content="2021-02-13T00:00:00+00:00">
+<meta name="twitter:card" content="summary">
+<meta property="twitter:title" content="Data Analytics Basics - Critical Review">
+<meta name="twitter:site" content="@">
+<meta name="twitter:creator" content="@Mohamed Sharaf">
+<script type="application/ld+json">
+{"description":"I had the pleasure recently to deliver a session at the Worldwide Software Architecture Summit. I see a rise of more virtual-only events phenomenon even beyond Covid as many now realized that the value/cost balance for these events is very positive.","url":"/2021/02/data-platform/Data-Analytics-Review","headline":"Data Analytics Basics - Critical Review","dateModified":"2021-02-13T00:00:00+00:00","datePublished":"2021-02-13T00:00:00+00:00","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"/2021/02/data-platform/Data-Analytics-Review"},"author":{"@type":"Person","name":"Mohamed Sharaf"},"@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+
+    
+
+    <!-- Site Favicon -->
+    <link rel="shortcut icon" href="/assets/images/favicon.ico" type="image/png">
+
+    <!-- Font Embed Code -->
+    <link href="https://fonts.googleapis.com/css?family=Karla:400,400i,700,700i" rel="stylesheet">
+
+    <!-- CSS Styles -->
+    <link href="/assets/css/style.css" rel="stylesheet">
+
+</head>
+
+
+
+<body class="layout-post">
+    <div id="page" class="site">
+
+        
+        <header id="masthead" class="site-header outer">
+    <div class="site-header-inside">
+        <div class="site-branding">
+            
+                <h1 class="site-title"><a href="/" rel="home">CloudSafari</a></h1>
+            
+        </div>
+<!-- .site-branding -->
+        <nav id="main-navigation" class="site-navigation" aria-label="Primary Navigation">
+            <ul class="menu">
+            
+                <li class="menu-item"><a href="/about/">About</a></li>
+            
+            </ul>
+            <button id="sidebar-show" class="sidebar-toggle"><span class="screen-reader-text">Open Sidebar</span><span class="icon-more" aria-hidden="true"></span></button>
+        </nav><!-- .site-navigation -->
+    </div>
+<!-- .site-header-inside -->
+</header><!-- .site-header -->
+        
+
+        <div id="content" class="site-content fadeInDown delay_075s">
+    <main id="main" class="site-main outer">
+        <article class="post-full inner">
+            <header class="post-header">
+                <div class="post-meta">
+                    <time class="post-date" datetime="2021-02-13">February 13,
+                        2021</time>
+                </div>
+<!-- .post-meta -->
+                <h1 class="posttitle">Data Analytics Basics - Critical Review</h1>
+            </header><!-- .post-header -->
+            
+            <div class="post-content">
+                <p>I had the pleasure recently to deliver a session at the <a href="https://architecture.geekle.us/">Worldwide Software Architecture Summit</a>. I see a rise of more virtual-only events phenomenon even beyond Covid as many now realized that the value/cost balance for these events is very positive.</p>
+
+<p>In this post, I will try to summarize the talk in few paragraphs.</p>
+
+<p>The talk -as implied by the title- is trying to discuss the basics but away from the restraints of what’s hot these days. I also wanted to be vendor-neutral as the conference track’s objective to discuss the architecture away from the vendor specifics. These are the main points 
+<!--more--></p>
+<ul>
+  <li>When a customer lists the data sources that they are interested in including in their data warehouse, they typically ignore two types of data
+    <ul>
+      <li>Dark Data: That’s the data collected from websites logs, telemetry and not analyzed for long term</li>
+      <li>External (contextual) Data: That’s the data that might be collected <em>about</em> the business not by the business itself. Examples: social media mentions to the company or the products, analysts/news agencies publishing about the company or the products</li>
+    </ul>
+  </li>
+  <li>Data warehouse <em>is a logical architecture</em> not a <u>product</u>. Many products can act as a data warehouse. I gave an example of a SQL Database used as a data warehouse when MPP architecture is not needed</li>
+  <li>Data Lake is a <em>concept</em> that -to be realized- requires many products from the same or different vendors to be used together. Not one product currently in the market that I’m aware of can create a complete data warehouse.</li>
+  <li>Data Lake storage is just storage. You can think of it as your laptop drive. you save files on it. These files can be of a special type that represent data (csv, parquet, avro…) or just files like pictures. The repeated marketing messages of storing structured, un-structured and semi-structured data gave many people the impression that there is some magic there
+    <ul>
+      <li>Before you passionately disagree, yes there are great technologies packed into the storage to make it accessible to multiple nodes/machines with multiple threads accessing the same file. That and other differences related to availability &amp; disaster recovery are masked by the cloud providers and since my scope is cloud so I wont go into the details of making a hard drive =&gt; data lake :)</li>
+    </ul>
+  </li>
+  <li>Data Lake storage doesn’t have indexes or statistics by itself. You need to have a big data cluster like spark to load the files into data structured that are indexed. New technologies like <a href="https://delta.io/">Delta Lakes</a> give extra layer of transactional consistency to the parquet files but still the performance of the relational databases is superior to the lakes</li>
+  <li>Data Hub is a <em>logical architecture</em> which enables data sharing. I see this ignored/avoided at many customers discussions mainly because the data team is mainly consists of data engineers &amp; data scientists and neither of them -typically- have experience in Enterprise integration APIs/service bus. In my opinion that shouldn’t hinder the architect from considering this as a logical component that can be physically satisfied by many implementations. A csv file on a blob/file container can be your data hub. I see SFTP in many cases upgraded to be a data hub. All these are accepted to some extend as long as in the original blueprint data hub was a basic component and didn’t just put there without holistic understanding of its function.</li>
+  <li>Relational Data Warehouses are not dead and according to Gartner many organizations are planning to use it. I see dependency on <strong>only data lake</strong> is un-natural and will cause the failure of the data analytics project when trying to force it on the data team.</li>
+</ul>
+
+<p>These are the main messages and I hope I could convey them to you to the best of my knowledge. <a href="/assets/docs/Data%20Analytics%20Architecture.pdf">The slide deck are here</a></p>
+
+<p>I’m also adding the recorded session (the recording was not live) here</p>
+
+<p><iframe id="media-XfTJwdPGjko" class="media" src="https://www.youtube.com/embed/XfTJwdPGjko?v=XfTJwdPGjko%7D" title="" width="100%" height="50" style="max-width: 600px; outline: none;" allow="encrypted-media; picture-in-picture" frameborder="0"></iframe></p>
+
+
+            </div>
+            <footer class="post-footer">
+                
+                <p class="post-tags">
+                     
+                    <a href="tag/data-lake/">Data-Lake</a>
+                    
+                     
+                    <a href="tag/data-warehouse/">Data-Warehouse</a>
+                    
+                     
+                    <a href="tag/data-hub/">Data-Hub</a>
+                    
+                    
+                </p>
+                
+                <div class="post-share">
+                    <span class="post-share-title">Share:</span>
+                    <a target="_blank" href="https://twitter.com/share?text=Data+Analytics+Basics+-+Critical+Review&amp;url=https://cloudsafari.ca/2021/02/data-platform/Data-Analytics-Review">Twitter</a>
+                    <a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://cloudsafari.ca/2021/02/data-platform/Data-Analytics-Review">Facebook</a>
+                </div>
+<!-- .share-post -->
+            </footer>
+            <div class="author-box">
+                <div class="author-avatar"><img src="/assets/images/authorimage.jpg" alt="Mohamed Sharaf's Picture" class="avatar"></div>
+                <div class="author-details">
+                    <h2 class="author-title">About Mohamed Sharaf</h2>
+                    <p class="author-description">Mohamed Sharaf, Cloud Solution Architect at Microsoft and curious to learn something new. Love intelligent debate and knowing intelligent people. Amateur cyclist though I do not think I will write about my hobby here. This blog is my personal way to provide high quality material to help a fellow learner understand something, anything. I will not write until there is something worth writing and I will try to update it and engage with comments regularly.</p>
+                </div>
+            </div>
+            
+<section id="comments-area" class="comments-area">
+    <h2 class="comments-title">Comments</h2>
+    <div class="comments-inside">
+        <div id="disqus_thread"></div>
+    </div>
+<!-- .comments-inside -->
+    <div id="comments-overlay" class="comments-overlay">
+        <a href="#" id="comments-show" class="comments-show">Show comments</a>
+    </div>
+<!-- .comments-overlay -->
+    <script type="text/javascript">
+        var disqus_shortname = 'cloudsafari-ca';
+        var disqus_developer = 0;
+        (function () {
+            var dsq = document.createElement('script');
+            dsq.type = 'text/javascript';
+            dsq.async = true;
+            dsq.src = window.location.protocol + '//' + disqus_shortname + '.disqus.com/embed.js';
+            dsq.setAttribute('data-timestamp', +new Date());
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by
+            Disqus.</a>
+</noscript>
+    <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+</section>
+
+
+        </article>
+        
+        <section class="read-next inner">
+            <h2 class="read-next-title">Read Next</h2>
+            
+            <article class="post">
+                <header class="post-header">
+                    <div class="post-meta">
+                        <time class="published" datetime="October 26, 2020">October 26, 2020</time>
+                    </div>
+                    <h3 class="post-title"><a href="/2020/10/data-platform/Call-Databricks-APIs">Call Databricks API from Logic Apps</a></h3>
+                    <p class="post-tags">
+                        
+                        
+                        
+                        <a href="/tag/databricks/">Databricks</a>
+                        
+                        
+                        
+                    </p>
+                </header>
+                
+                <a href="/2020/10/data-platform/Call-Databricks-APIs" class="post-thumbnail">
+                    <img src="/assets/images/posts/2020/databricks-api-thumbnail.png" alt="Call Databricks API from Logic Apps">
+                </a>
+                
+            </article>
+            
+            
+        </section><!-- .read-next -->
+    </main><!-- .site-main -->
+</div>
+<!-- .site-content -->
+
+        
+
+        
+
+        <footer id="colophon" class="site-footer outer">
+            <div class="site-footer-inside">
+                <p class="social-links">
+    
+    <a href="https://twitter.com/@mohamsharaf" target="_blank">
+        <span class="fa-twitter fa" aria-hidden="true"></span>
+        <span class="screen-reader-text">Twitter</span>
+    </a>
+    
+    
+    
+    <a href="https://github.com/mosharafMS" target="_blank">
+        <span class="fa-github fa" aria-hidden="true"></span>
+        <span class="screen-reader-text">GitHub</span>
+    </a>
+    
+    
+    
+    
+    <a href="https://medium.com/@mohamed.sharaf" target="_blank">
+        <span class="fa-medium fa" aria-hidden="true"></span>
+        <span class="screen-reader-text">medium</span>
+    </a>
+    
+    
+    
+    
+    <a href="https://www.linkedin.com/in/mosharafms" target="_blank">
+        <span class="fa-linkedin fa" aria-hidden="true"></span>
+        <span class="screen-reader-text">Linkedin</span>
+    </a>
+    
+    
+</p>
+                <p class="site-info">
+                    <a href="#">CloudSafari</a> © 2021 . <br>
+                    Powered by <a target="_blank" href="https://jekyllrb.com/">Jekyll</a>.
+                </p>
+                <p class="back-to-top">
+                    <a id="top-button" class="top-button" href="#page">
+                        <span class="icon-arrow-up" aria-hidden="true"></span>
+                        <span class="screen-reader-text">Back to top</span>
+                    </a>
+                </p>
+            </div>
+<!-- .site-footer-inside -->
+        </footer><!-- .site-footer -->
+    </div>
+<!-- .site -->
+    <div id="site-overlay" class="site-overlay"></div>
+    <aside id="sidebar" class="sidebar">
+	<div class="sidebar-scrollable">
+		<div class="sidebar-inside">
+			<button id="sidebar-hide" class="sidebar-toggle"><span class="screen-reader-text">Close Sidebar</span><span aria-hidden="true" class="icon-close"></span></button>
+			<nav id="sidebar-navigation" class="widget site-navigation">
+				<h2 class="widget-title">Explore Site</h2>
+				<ul class="menu">
+					
+						<li class="menu-item"><a href="/about/">About</a></li>
+					
+				</ul>
+			</nav>
+			
+<section class="widget widget-text">
+    <h2 class="widget-title">About CloudSafari</h2>
+    <p>CloudSafari is my personal window to share about my work and technical projects. All information are provided as is and my views only represent myself</p>
+</section>
+
+
+<section class="widget widget-recent-posts">
+    <h2 class="widget-title">Recent Articles</h2>
+    <ul>
+        
+        <li>
+            <div class="post-header">
+                <div class="post-meta">
+                    <time class="published" datetime="??">February 13, 2021</time>
+                </div>
+                <div class="post-title">
+                    <a href="/2021/02/data-platform/Data-Analytics-Review">Data Analytics Basics - Critical Review</a>
+                </div>
+            </div>
+            
+            <a class="post-thumbnail" href="/2021/02/data-platform/Data-Analytics-Review">
+                <img src="/assets/images/posts/2021/analytics-thumbnail.jpg" alt="Data Analytics Basics - Critical Review">
+            </a>
+            
+        </li>
+        
+        <li>
+            <div class="post-header">
+                <div class="post-meta">
+                    <time class="published" datetime="??">October 26, 2020</time>
+                </div>
+                <div class="post-title">
+                    <a href="/2020/10/data-platform/Call-Databricks-APIs">Call Databricks API from Logic Apps</a>
+                </div>
+            </div>
+            
+            <a class="post-thumbnail" href="/2020/10/data-platform/Call-Databricks-APIs">
+                <img src="/assets/images/posts/2020/databricks-api-thumbnail.png" alt="Call Databricks API from Logic Apps">
+            </a>
+            
+        </li>
+        
+        <li>
+            <div class="post-header">
+                <div class="post-meta">
+                    <time class="published" datetime="??">September 13, 2020</time>
+                </div>
+                <div class="post-title">
+                    <a href="/2020/09/data-engineering/Azure-DataFactory-Cancel-Pipeline-Run">Cancel Data Factory Pipeline Run </a>
+                </div>
+            </div>
+            
+            <a class="post-thumbnail" href="/2020/09/data-engineering/Azure-DataFactory-Cancel-Pipeline-Run">
+                <img src="/assets/images/posts/2020/ADF-thumbnail.jpg" alt="Cancel Data Factory Pipeline Run ">
+            </a>
+            
+        </li>
+        
+    </ul>
+</section>
+
+<!-- Create a sorted array of tags -->
+ 
+<section class="widget widget-tagcloud">
+    <h2 class="widget-title">Tags</h2>
+    <div class="tagcloud">
+        
+        <a href="https://cloudsafari.ca/tag/azure-databricks/">Azure-Databricks</a>
+        
+        <a href="https://cloudsafari.ca/tag/azure-firewall/">Azure-Firewall</a>
+        
+        <a href="https://cloudsafari.ca/tag/data-factory/">Data-Factory</a>
+        
+        <a href="https://cloudsafari.ca/tag/data-hub/">Data-Hub</a>
+        
+        <a href="https://cloudsafari.ca/tag/data-lake/">Data-Lake</a>
+        
+        <a href="https://cloudsafari.ca/tag/data-warehouse/">Data-Warehouse</a>
+        
+        <a href="https://cloudsafari.ca/tag/databricks/">Databricks</a>
+        
+        <a href="https://cloudsafari.ca/tag/pipeline-run/">Pipeline-Run</a>
+        
+        <a href="https://cloudsafari.ca/tag/vnet/">VNET</a>
+        
+    </div>
+</section>
+
+
+		</div>
+<!-- .sidebar-inside -->
+	</div>
+<!-- .sidebar-scrollable -->
+</aside><!-- .sidebar -->
+    
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-177612139-1"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'UA-177612139-1', { 'anonymize_ip': true });
+  </script>
+  <script type="text/javascript">
+    (function(c,l,a,r,i,t,y){
+        c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+        t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+        y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+    })(window, document, "clarity", "script", "5ei8glh2oh");
+</script>
+
+    <!-- Javascript Assets -->
+    <script src="/assets/js/jquery-3.3.1.min.js"></script>
+    <script src="/assets/js/plugins.js"></script>
+    <script src="/assets/js/custom.js"></script>
+
+</body>
+
+</html>
